@@ -14,3 +14,8 @@ Top 50 Shell Scripting Interview Questions & Answers: https://www.guru99.com/she
 Sed Interview Questions : https://www.complexsql.com/sed-interview-questions/
 
 10 Useful ‘Interview Questions and Answers’ on Linux Shell Scripting: https://www.tecmint.com/interview-questions-on-shell-scripting/
+
+Using cut, sort, and unique to explore data with bash: https://riffomonas.org/code_club/2020-08-06-exploring-data-with-bash
+
+2 grep, sed samples: https://riffomonas.org/code_club/2020-08-10-test-driven-development
+

@@ -1,6 +1,7 @@
 
 
 __Viewing the configuration of all interfaces__
+
 * `ifconfig -a` (displays also the inactive interfaces)
 
 

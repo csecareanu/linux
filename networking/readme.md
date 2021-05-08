@@ -53,7 +53,7 @@ __Bring up an interface__
 ====
 
 * check if interface exists
-* 
+ * 
   ```
   int sock = socket(AF_INET, SOCK_STREAM, 0);
   int res = ioctl(sockfd, SIOCGIFINDEX, interf_name);

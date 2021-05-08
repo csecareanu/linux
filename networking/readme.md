@@ -25,19 +25,20 @@ ifconfig can only assign a static IP address to a network interface. If you want
 * In one line: `sudo ifconfig eth0 192.168.2.5 netmask 255.255.255.0 broadcast 192.168.2.7`
 
 * check inteface exists
+* 
   ```
   int sock = socket(AF_INET, SOCK_STREAM, 0);
   int res = ioctl(sockfd, SIOCGIFINDEX, interf_name);
   close(sock)
   ```
 * retrieveMac
-  * ioctl( sockfd, SIOCGIFHWADDR, &ifr )
+  * `ioctl( sockfd, SIOCGIFHWADDR, &ifr )`
 * retrieveIPAddress
-  * ioctl(sockfd, SIOCGIFADDR, &ifr)
+  * `ioctl(sockfd, SIOCGIFADDR, &ifr)`
 * retrieveNetmask
-  * ioctl(sockfd, SIOCGIFNETMASK, &ifr)
+  * `ioctl(sockfd, SIOCGIFNETMASK, &ifr)`
 * retrieveBroadcastAddress
-  * ioctl(sockfd, SIOCGIFBRDADDR, &ifr)
+  * `ioctl(sockfd, SIOCGIFBRDADDR, &ifr)`
 * retrieveMTU
-  * ioctl(sockfd, SIOCGIFMTU, &ifr)
+  * `ioctl(sockfd, SIOCGIFMTU, &ifr)`
  

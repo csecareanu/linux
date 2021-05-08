@@ -24,7 +24,35 @@ ifconfig can only assign a static IP address to a network interface. If you want
 * `sudo ifconfig wlan1 broadcast 172.16.25.98`
 * In one line: `sudo ifconfig eth0 192.168.2.5 netmask 255.255.255.0 broadcast 192.168.2.7`
 
-* check inteface exists
+
+__Bring up an interface__
+==No VLAN==
+/sbin/ip addr add 192.168.150.2/24 broadcast 192.168.220.255 dev wlan0
+
+==With VLAN==
+/sbin/ip addr add fd00:1111:1111:0010::10/64  dev wlan0
+modprobe 8021q
+
+==Set routing rules==
+enable
+/sbin/ip route replace 192.168.150.0/24 src 192.168.220.2 dev wlan0 table 300
+disable
+/sbin/ip route del 192.168.150.0/24 src 192.168.150.2 dev wlan0 table 300
+
+==add routing rules==
+enable
+ip  rule add iif wlan0 table 300  pref 0
+disable
+/sbin/ip  rule del iif wlan0 table 300
+
+==bring up interface==
+enable
+ip link set dev wlan0 
+
+
+
+
+* check if interface exists
 * 
   ```
   int sock = socket(AF_INET, SOCK_STREAM, 0);

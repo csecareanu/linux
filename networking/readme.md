@@ -27,10 +27,10 @@ ifconfig can only assign a static IP address to a network interface. If you want
 
 __Bring up an interface__
 * No VLAN
-  * `/sbin/ip addr add 192.168.150.2/24 broadcast 192.168.220.255 dev wlan0`
+  * `ip addr add 192.168.150.2/24 broadcast 192.168.220.255 dev wlan0`
 
 * With VLAN
-  * `/sbin/ip addr add fd00:1111:1111:0010::10/64  dev wlan0`
+  * `ip addr add fd00:1111:1111:0010::10/64  dev wlan0`
   * `modprobe 8021q`
 
 * Set routing rules
@@ -43,7 +43,7 @@ __Bring up an interface__
   * enable
     * `ip rule add iif wlan0 table 300  pref 0`
   * disable
-    * `/sbin/ip  rule del iif wlan0 table 300`
+    * `ip  rule del iif wlan0 table 300`
 
 * Bring up interface
   * enable

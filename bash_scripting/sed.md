@@ -1,7 +1,15 @@
 
 # Sed
 
-Stream Editor and can perform: search, find, replace, insert, delete.
+Sed stands for _Stream Editor_
+
+Functions of sed command on a file
+* viewing file content
+* searching
+* find and replace
+* insertion or deletion
+
+__ __
  
 ## Replace
  

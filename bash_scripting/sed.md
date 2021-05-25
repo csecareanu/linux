@@ -67,6 +67,7 @@ sed '<line_no>d' filename
 * To modify the file: `sed -i '1,3d' sed.txt`
 * 
 ## Make changes permanent
+Use the __-i__ parameter to make a change permanent (to modify the input file)
 ```
 sed  -i 's/\bstring1\b/string2/g' filename
 ```

@@ -21,7 +21,7 @@ Sed also supports __regular expressions_ which allows it to perform complex patt
 sed 's/string1/string2/g' filename
 ```
 __s__ stantds for - _substitute_\
-__g__ - stands for - _global_
+__g__ stands for - _global_
 
 * `sed 's/unix/linux/g' sed.txt`
  

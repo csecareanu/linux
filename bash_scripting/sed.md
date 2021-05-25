@@ -3,7 +3,7 @@
 
 __Sed__ stands for _Stream Editor_
 
-Command syntax: __sed [options] 'commands' file_to_work_with_sed__
+Command syntax: __sed [options] 'commands' file/files__
 
 
 __Functions of sed command on a file__

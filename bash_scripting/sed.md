@@ -97,7 +97,7 @@ sed -i '$a  <text>'  <file\_name>
 * `sed '$a ----------------' sed_employee_info.txt`
 * To modify the file: `sed -i '$a ----------------' sed_employee_info.txt`
 
-### Insert a new line before/after a line which contains a specified text
+### Insert a new line before/after all lines which contain a specified text
 * `sed -i '/Narendra/i 0 Mounika 46000' sed_employee_info.txt`
 * `sed -i '/Clinton/a 5 Anil 56000' sed_employee_info.txt`
 

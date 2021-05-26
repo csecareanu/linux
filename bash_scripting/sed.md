@@ -41,7 +41,7 @@ sed 's/^string1/string2/g' filename
  
 ### Change a word if it is only at the end of a line
 ```
-sed 's/string1/string2$/g' filename
+sed 's/string1$/string2/g' filename
 ```
 * `sed 's/os.$/system./g' sed.txt`
 

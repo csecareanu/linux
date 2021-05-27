@@ -1,5 +1,28 @@
 
-Regular expressions allow us to search for specific pattern of text.
+## Regular expressions allow us to search for specific pattern of text.
+
+The __reqular_exp.txt__ file used to run the exampless for this tutorial:
+```
+abcdefghijklmnopqurtuvwxyz
+ABCDEFGHIJKLMNOPQRSTUVWXYZ
+1234567890
+
+Ha HaHa
+
+MetaCharacters (Need to be escaped):
+.[{()\^%|?*+
+
+coreyms.com
+
+321-555-4321
+123.555.1234
+
+Mr. Schafer
+Mr Smith
+Ms Davis
+Mrs. Robinson
+Mr. T
+```
 
 
 ## Metacharcters

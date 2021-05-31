@@ -43,7 +43,7 @@ If you want to serach for the '.' character then you have to escpe it because it
 The '\\' charater is a special character also. So if you want to search specifically for a backslash then you have to escape it itself:\
 `grep '\\' reqular_exp.txt`
 
-## D
+## Syntax
 
 | Syntax | Description |
 | ----------- | ----------- |
@@ -54,31 +54,29 @@ The '\\' charater is a special character also. So if you want to search specific
 |\W|Not a Word Character|
 |\s|Whitespace (space, tab, newline)|
 |\S|Not Whitespace|
+|-|_<sub>Anchors. They don't actually match any characters. They match invisible position before or after characters</sub>_|
+|\b|Word Boundary `grep '\bHa' reqular_exp.txt`, `grep 'Ha\b' reqular_exp.txt`, `grep '\bHa\b' reqular_exp.txt`|
+|\B|Not a Word Boundary `grep '\BHa' reqular_exp.txt`, `grep 'Ha\B' reqular_exp.txt`, `grep '\BHa\B' reqular_exp.txt`|
+|^||Beginning of a String `grep '^Ha' reqular_exp.txt`|
+|$|End of a String `grep 'Ha$' reqular_exp.txt`|
 |-|-|
-|\b|Word Boundary|
-|\B|Not a Word Boundary|
-|^||Beginning of a String|
-|$|End of a String|
-|-|-|
-|[]|Matches Characters in brackets|
+|[]|Character set. Matches Characters in brackets. <sub>Don't need to escape special characters in a character set</sub>|
 |[^ ]|Matches Characters NOT in brackets|
 |\||Either Or|
 
 ---
 
-. 	-  Any Character Except New Line
-\d	- Digit (0-9)
-\D	- Not a Digit (0-9)
-\w	- Word Character (a-z, A-Z, 0-9, _)
-\W 	- Not a Word Character
-\s	- Whitespace (space, tab, newline)
-\S	- Not Whitespace
+How to match phone numbers:
+- Match all digits: `\d`
+- Match three digits in a row: `\d\d\d`
+- Match three digists in a row fallowed by '.' or '-' characters: `\d\d\d[.-]`
+- Match a phone number of format "321-555-4321" or "123.555.1234": `\d\d\d[.-]\d\d\d[.-]\d\d\d\d`
+- `\d\d\d[.-]\d\d\d[.-]\d\d\d\d` will match "321-555-4321" but will not match "321--555-4321" (`[.-]` searches for only one character)
+- Match only phne numbers which start with "800" or "900" `[89]00[.-]\d\d\d[.-]\d\d\d\d
 
-\b	-Word Boundary
-\B	- Not a Word Boundary
-^	- Beginning of a String
-$	- End of a String
-
-[]	- Matches Characters in brackets
-[^ ]	- Matches Characters NOT in brackets
-|	- Either Or
+### Characher set '[]'
+- Match only digits form 1 to 7: `[1-7]`
+- Match all lower case characters from a to z: `[a-z]`
+- Match all upper case or lower case characters: `[a-zA-Z]`
+- `[^]`: In a character set the "^" symbol negates the set and matches everything that is not in the set.
+- 

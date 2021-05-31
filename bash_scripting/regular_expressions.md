@@ -1,4 +1,6 @@
 
+Tutorial: https://www.youtube.com/watch?v=sa-TUpSx1JA
+
 ## Regular expressions allow us to search for specific pattern of text.
 
 The __reqular_exp.txt__ file used to run the exampless for this tutorial:
@@ -63,20 +65,28 @@ The '\\' charater is a special character also. So if you want to search specific
 |[]|Character set. Matches Characters in brackets. <sub>Don't need to escape special characters in a character set</sub>|
 |[^ ]|Matches Characters NOT in brackets|
 |\||Either Or|
+|()|Group|
+|-|<sub>Quantifiers</sub>|
+|*|0 or More|
+|+|1 or More|
+|?|0 or One|
+|{3}|Exact Number|
+|{3,4}|Range of Numbers|
 
 ---
 
-How to match phone numbers:
 - Match all digits: `\d`
 - Match three digits in a row: `\d\d\d`
 - Match three digists in a row fallowed by '.' or '-' characters: `\d\d\d[.-]`
 - Match a phone number of format "321-555-4321" or "123.555.1234": `\d\d\d[.-]\d\d\d[.-]\d\d\d\d`
 - `\d\d\d[.-]\d\d\d[.-]\d\d\d\d` will match "321-555-4321" but will not match "321--555-4321" (`[.-]` searches for only one character)
-- Match only phne numbers which start with "800" or "900" `[89]00[.-]\d\d\d[.-]\d\d\d\d
-
-### Characher set '[]'
+- Match only phone numbers which start with "800" or "900" `[89]00[.-]\d\d\d[.-]\d\d\d\d
+- Match phone numbers using _quatifiers_: `\d{3}[.-]\d{3}[.-]\d{4}`
 - Match only digits form 1 to 7: `[1-7]`
 - Match all lower case characters from a to z: `[a-z]`
 - Match all upper case or lower case characters: `[a-zA-Z]`
 - `[^]`: In a character set the "^" symbol negates the set and matches everything that is not in the set.
-- 
+- Match everything that is not lower case letter: `[^a-z]`
+- Match everything that is not 'b' followed by 'at': will match 'cat', 'mat' but will not match 'pat'
+- Match strings of the form: "Mr. Schafer", "Mr Smith", "Mr. T": `Mr\.?\s[A-Z]\w*`
+- Match strings of the form (using groups): "Mr. Schafer", "Mr Smith", "Mr. T", "Ms Davis", "Mrs. Robinson" : `M(r|s|rs)\.?\s[A-Z]\w*`

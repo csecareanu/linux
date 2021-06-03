@@ -48,7 +48,7 @@ sed 's/string1$/string2/g' filename
 ### Change a word with a value derived from itself
 `&`: refer to that portion of the pattern space which matched
 
-* `sed 's/\blocalhost\b/& 192.168.25.50/' file`
+* `sed 's/localhost/& 192.168.25.50/' file`
 
 ## Delete
 

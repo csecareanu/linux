@@ -45,6 +45,11 @@ sed 's/string1$/string2/g' filename
 ```
 * `sed 's/os.$/system./g' sed.txt`
 
+### Change a word with a value derived from itself
+`&`: refer to that portion of the pattern space which matched
+
+* `sed 's/\blocalhost\b/& 192.168.25.50/' file`
+
 ## Delete
 
 __d__ - delete lines from an existing file

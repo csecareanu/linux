@@ -1,7 +1,12 @@
  # ln, link
  
  It is useful for maintaining multiple copies of a file in many places at once without using up storage for the __copies; instead, a link points__ to the original copy.
-There are two types of links; hard links and symbolic links.  How a link __points__ to a file is one of the differences between a __hard__ and __symbolic__ link.
+ 
+
+__Functions of ln command__
+* create symbolik links for files and folders (_we will use only symbolic links for files, they are most unsed_)
+* create hard links for files and folders (_we will not use hard links, not used frequently_)
+
 
 We will use for the moment only symblic links (using the __-s__ option).\
 Symbolic links behave as a shortcut to a file.

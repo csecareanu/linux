@@ -18,7 +18,7 @@ __-n__ If the link_name is a symbolic link, do not follow it. This is most usefu
 exemple cu fiecare parametru
 -n ce face exact? daca link_name deja exista si foloses ln fara _-n_ ce se va intampla?
 
-### exemple
+### 2 exemple
 ln -snf rrnDB-5.6_16S_rRNA.fasta l
 
 sau ln -snf data/raw/rrnDB-5.6_16S_rRNA.fasta l

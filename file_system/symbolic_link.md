@@ -13,6 +13,14 @@ __-s__    Create a symbolic link.\
 __-f__ If the proposed link (link_name) already exists, then unlink it so that the link may occur.\
 __-n__ If the link_name is a symbolic link, do not follow it. This is most useful with the -f option, to replace a symlink which may point to a directory.
 
-//to do
-exemple cu fiecare parametru\
+## to do
+### 1
+exemple cu fiecare parametru
 -n ce face exact? daca link_name deja exista si foloses ln fara _-n_ ce se va intampla?
+
+### exemple
+ln -snf rrnDB-5.6_16S_rRNA.fasta l
+
+sau ln -snf data/raw/rrnDB-5.6_16S_rRNA.fasta l
+
+rm l - va sterge fisierul catre care point-eaza?

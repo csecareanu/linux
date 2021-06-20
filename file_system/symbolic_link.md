@@ -4,8 +4,8 @@
  
 
 __Functions of `ln` command__
-* create symbolik links for files and folders (_we will use only symbolic links for files, they are most unsed_)
-* create hard links for files and folders (_we will not use hard links, not used frequently_)
+* create symbolik links for files and folders (_we will use only symbolic links for files, they are mostly used_)
+* create hard links for files and folders (_we will not use hard links, usally not used_)
 
 
 We will use for the moment only symblic links (using the __-s__ option).\

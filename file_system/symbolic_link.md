@@ -3,7 +3,7 @@
  It is useful for maintaining multiple copies of a file in many places at once without using up storage for the __copies; instead, a link points__ to the original copy.
  
 
-__Functions of ln command__
+__Functions of `ln` command__
 * create symbolik links for files and folders (_we will use only symbolic links for files, they are most unsed_)
 * create hard links for files and folders (_we will not use hard links, not used frequently_)
 

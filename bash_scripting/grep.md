@@ -18,14 +18,14 @@ grep ">" rrnDB-5.6_16S_rRNA.fasta | wc -l
 77530
 ```
 
-# To show you the lines before your matches, you can add -B to your grep.
+### To show you the lines before your matches, you can add -B to your grep.
 ```
-grep -B 4 'keyword' /path/to/file.log
+grep -B <number_of_lines_before> 'keyword' /path/to/file.log
 ```
 
-# To show the log lines that match after the keyword, use the -A parameter.
+### To show the log lines that match after the keyword, use the -A parameter.
 ```
-grep -A 2 'keyword' /path/to/file.log
+grep -A <number_of_lines_after> 'keyword' /path/to/file.log
 ```
 ```
 grep "8914..10469" rrnDB-5.6_16S_rRNA.fasta

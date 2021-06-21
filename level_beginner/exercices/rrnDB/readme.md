@@ -29,16 +29,16 @@ grep -c ">" rrnDB-5.6_16S_rRNA.fasta
 
 ### Analysing the rrnDB.align table
 
-`head data/v19/rrnDB.align`
+`grep ">" data/v19/rrnDB.align | head -1`
 
-| - demarcate different fields
+`|` - demarcate different fields
 
 ```
-Escherichia_coli|GCF_000599665.1|NZ_CP007392.1|Chromosome__ANONYMOUS|143933..145488_+   1556    CP010213.Esc31618       1465    kmer    91.47   needleman       30      1493    1       1465    1465    1       0       0       99.65
+Escherichia_coli|GCF_000599665.1|NZ_CP007392.1|Chromosome__ANONYMOUS|143933..145488_+
 ```
 
-`Escherichia_coli` - the organism name
-`GCF_....` - assembly accession from genbank
-`NZ_...` - the refseq accession number from genbank
-`Chromosome__ANONYMOUS` - information about which chromosome or which genetic elemenent it came from in the genome
-`143933..145488_+   1556    CP010213.Esc31618...` - the coordonates in the genome where the gene was identified from
+`Escherichia_coli` - the organism name\
+`GCF_....` - assembly accession from genbank\
+`NZ_...` - the refseq accession number from genbank\
+`Chromosome__ANONYMOUS` - information about which chromosome or which genetic elemenent it came from in the genome\
+`143933..145488_+` - the coordonates in the genome where the gene was identified from

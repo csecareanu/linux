@@ -20,4 +20,12 @@ wc rrnDB-5.6_16S_rRNA.fasta
 ```
 
 
+# CAT
 
+Concatenate a bunch of files:
+```
+ls
+file_1.csv    file_2.csv    file_8.csv
+
+cat file_* > all_files.csv
+```

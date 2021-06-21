@@ -20,12 +20,5 @@ wc rrnDB-5.6_16S_rRNA.fasta
 ```
 
 
-# CAT
-
-Concatenate a bunch of files:
-```
-ls
-file_1.csv    file_2.csv    file_8.csv
-
-cat file_* > all_files.csv
-```
+# CUT
+You can cut based on a delimiter found or based on number of characters, or based on number of bytes.

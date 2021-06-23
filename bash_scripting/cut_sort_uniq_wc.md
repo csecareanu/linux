@@ -21,4 +21,14 @@ wc rrnDB-5.6_16S_rRNA.fasta
 
 
 # CUT
-You can cut based on a delimiter found or based on number of characters, or based on number of bytes.
+You can cut based on a delimiter found, or based on number of characters, or based on number of bytes.
+
+## Parameters
+* -f: which field you want
+* -d: the delimiter used to define fields
+
+# UNIQ
+
+## Parameters
+* default: return the unique lines
+* -c: the number of times each unique line appears

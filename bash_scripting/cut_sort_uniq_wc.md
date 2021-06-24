@@ -32,3 +32,52 @@ You can cut based on a delimiter found, or based on number of characters, or bas
 ## Parameters
 * default: return the unique lines
 * -c: the number of times each unique line appears
+
+# SORT
+
+## Options
+* -r sorting in reverse order
+* -n: numerical sort
+```
+$ cat > file1.txt
+50
+39
+15
+89
+200
+
+$ sort -n file1.txt
+Output :
+15
+39
+50
+89
+200
+
+$ sort -n -r file1.txt
+Output :
+200
+89
+50
+39
+15
+```
+* -k: which field to sort on
+```
+$ cat employee.txt
+manager  5000
+clerk    4000
+employee  6000
+peon     4500
+director 9000
+guard     3000
+
+sort -k 2 -n employee.txt
+guard    3000
+clerk    4000
+peon     4500
+manager  5000
+employee 6000
+director 9000
+```
+* -t: the delimiter to define fields based on (default is a space character)

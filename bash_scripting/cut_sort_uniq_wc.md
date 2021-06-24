@@ -28,14 +28,59 @@ You can cut based on a delimiter found, or based on number of characters, or bas
 * -d: the delimiter used to define fields
 
 # UNIQ
+Uniq is the tool that helps to detect the __adjacent__ duplicate lines and also deletes the duplicate lines.
 
 ## Parameters
-* default: return the unique lines
+* without parameters: return the unique lines
 * -c: the number of times each unique line appears
+```
+$cat kt.txt
+Output:
+I love music.
+I love music.
+I love music of Kartik.
+I love music.
+I love music of Kartik.
+
+$ cat kt.txt | sort | uniq -c
+Output:
+2 I love music of Kartik.
+3 I love music.
+
+
+$ cat kt.txt | sort | uniq
+Output:
+I love music of Kartik.
+I love music.
+```
+
+Because uniq filters out the __adjacent__ matching lines, if you want to remove all matching lines, you have to sort first the input:
+```
+$cat kt.txt
+Output:
+I love music.
+I love music.
+I love music of Kartik.
+I love music.
+I love music of Kartik.
+
+$ cat kt.txt | uniq
+Output:
+I love music.
+I love music of Kartik.
+I love music.
+I love music of Kartik.
+
+$ cat kt.txt | sort | uniq
+Output:
+I love music of Kartik.
+I love music.
+```
+
 
 # SORT
 
-## Options
+## Parameters
 * -r sorting in reverse order
 * -n: numerical sort
 ```

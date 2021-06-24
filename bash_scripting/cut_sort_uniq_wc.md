@@ -81,3 +81,29 @@ employee 6000
 director 9000
 ```
 * -t: the delimiter to define fields based on (default is a space character)
+```
+cat employee.txt
+5000:manager:1
+4000:clerk:4
+6000:employee:3
+4500:peon:2
+
+sort -k 2 -t ':' -r employee.txt
+4500:peon:2
+5000:manager:1
+6000:employee:3
+4000:clerk:4
+
+$ sort -k 2 -t ':' employee.txt
+4000:clerk:4
+6000:employee:3
+5000:manager:1
+4500:peon:2
+
+$ sort -k 3 -n -t ':' employee.txt
+5000:manager:1
+4500:peon:2
+6000:employee:3
+4000:clerk:4
+
+```

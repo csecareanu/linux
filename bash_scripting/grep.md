@@ -1,7 +1,5 @@
 # Grep
 
-__Grep__ stands for _Global Regular Expression Print_
-
 
 ## Syntax
 

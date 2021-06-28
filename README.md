@@ -1,5 +1,8 @@
 # linux_cmd_line
 
+
+Linux Essentials Exam 010: https://www.lpi.org/our-certifications/exam-010-objectives
+
 Linux Interview Questions: https://mindmajix.com/linux-interview-questions#what-is-linux
 
 Grep Sed Awk ChallengesEasyMediumHard: https://www.hackerrank.com/domains/shell/grep-sed-awk/page/1

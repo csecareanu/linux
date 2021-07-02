@@ -71,6 +71,16 @@ procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
  0  0 421448 3904940 242968 4594336    0    1    10    11    8    2  4  1 95  0  0
 ```
 
+```
+top
+```
+The top command is useful to check memory and CPU usage per process. It displays information about:
+  * uptime
+  * average load
+  * tasks running
+  * number of users logged in
+  * number of CPUs/CPU utilization
+  * memory/swap system processes
 
 ### The detailed description listed below provides an explanation for each value in case you need assistance in analyzing the results.
 

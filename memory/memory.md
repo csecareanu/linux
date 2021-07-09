@@ -1,6 +1,7 @@
 
 
-Pring virtual file that reports the amount of available and used memory.
+Virtual file that reports the amount of available and used memory.
+
 ```
 cat /proc/meminfo
 

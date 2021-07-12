@@ -21,6 +21,27 @@ This file contains the environment for the process. The entries are separated by
 Thus, to print out the environment of process 1, you would do:\
 `$ strings /proc/1/environ`
 
+### /proc/[pid]/exe
+This file is a symbolic link containing the actual pathname of the executed command.
+
+### /proc/[pid]/fd/
+ This is a subdirectory containing one entry for each file which the process has open, named by its file descriptor, and which is a symbolic link to the actual file.  Thus, 0 is standard input, 1 standard output, 2
+              standard error, and so on.
+
+              For file descriptors for pipes and sockets, the entries will be symbolic links whose content is the file type with the inode.  A readlink(2) call on this file returns a string in the format:
+
+                  type:[inode]
+
+              For example, socket:[2248868] will be a socket and its inode is 2248868.  For sockets, that inode can be used to find more information in one of the files under /proc/net/.
+
+              For file descriptors that have no corresponding inode (e.g., file descriptors produced by epoll_create(2), eventfd(2), inotify_init(2), signalfd(2), and timerfd(2)), the entry will be a symbolic link with contents
+              of the form
+
+                  anon_inode:<file-type>
+
+              In some cases, the file-type is surrounded by square brackets.
+
+              For example, an epoll file descriptor will have a symbolic link whose content is the string anon_inode:[eventpoll].
 
 ### Virtual file that reports the amount of available and used memory.
 

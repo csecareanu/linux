@@ -25,24 +25,274 @@ Thus, to print out the environment of process 1, you would do:\
 This file is a symbolic link containing the actual pathname of the executed command.
 
 ### /proc/[pid]/fd/
- This is a subdirectory containing one entry for each file which the process has open, named by its file descriptor, and which is a symbolic link to the actual file.  Thus, 0 is standard input, 1 standard output, 2
-              standard error, and so on.
+This is a subdirectory containing one entry for each file which the process has open, named by its file descriptor, and which is a symbolic link to the actual file.  Thus, 0 is standard input, 1 standard output, 2 standard error, and so on.
 
-              For file descriptors for pipes and sockets, the entries will be symbolic links whose content is the file type with the inode.  A readlink(2) call on this file returns a string in the format:
+```
+ls -l
+lr-x------    1 ic       ic              64 Jul 12 00:33 0 -> /dev/null
+l-wx------    1 ic       ic              64 Jul 12 00:33 1 -> /dev/console
+lrwx------    1 ic       ic              64 Jul 12 00:33 10 -> anon_inode:[eventfd]
+lrwx------    1 ic       ic              64 Jul 12 00:33 11 -> anon_inode:[eventfd]
+lrwx------    1 ic       ic              64 Jul 12 00:33 13 -> socket:[16270]
+lrwx------    1 ic       ic              64 Jul 12 00:33 14 -> /dev/shm/onoffstate
+```
 
-                  type:[inode]
+For file descriptors for pipes and sockets, the entries will be symbolic links whose content is the file type with the inode.  A `readlink` call on this file returns a string in the format:\
+`type:[inode]`
 
-              For example, socket:[2248868] will be a socket and its inode is 2248868.  For sockets, that inode can be used to find more information in one of the files under /proc/net/.
+For example, `socket:[2248868]` will be a socket and its inode is 2248868.  For sockets, that inode can be used to find more information in one of the files under `/proc/net/`.
 
-              For file descriptors that have no corresponding inode (e.g., file descriptors produced by epoll_create(2), eventfd(2), inotify_init(2), signalfd(2), and timerfd(2)), the entry will be a symbolic link with contents
-              of the form
+For file descriptors that have no corresponding inode (e.g., file descriptors produced by `epoll_create`, `eventfd`, `inotify_init`, `signalfd`, and `timerfd`, the entry will be a symbolic link with contents of the form:\
+`anon_inode:<file-type>`
 
-                  anon_inode:<file-type>
+In some cases, the file-type is surrounded by square brackets.
 
-              In some cases, the file-type is surrounded by square brackets.
+For example, an epoll file descriptor will have a symbolic link whose content is the string `anon_inode:[eventpoll]`.
 
-              For example, an epoll file descriptor will have a symbolic link whose content is the string anon_inode:[eventpoll].
+### /proc/[pid]/fdinfo/ 
+This is a subdirectory containing one entry for each file which the process has open, named by its file descriptor. The files in this directory are readable only by the owner of the process. The contents of each file can be read to obtain information about the corresponding file descriptor. The content depends on the type of file referred to by the corresponding descriptor.
+ 
+For regular files and directories, we see something like:\
+```
+$ cat /proc/12015/fdinfo/4
+pos:    1000
+flags:  01002002
+mnt_id: 21
+```
 
+The `pos` field is a decimal number showing the current file offset. The `flags` field is an octal number that displays the file access mode and file status flags (see `open`).\
+The `mnt_id` field is the ID of the mount point containing this file.\
+See the description of `/proc/[pid]/mountinfo`.
+
+For `eventfd` file descriptors (see `eventfd`), we see the following fields:\
+```
+pos: 0
+flags:    02
+mnt_id:   10
+eventfd-count:               40
+```
+`eventfd-count` is the current value of the eventfd counter, in hexadecimal.
+
+For `epoll` file descriptors (see `epoll`), we see the following fields:
+```
+pos: 0
+flags:    02
+mnt_id:   10
+tfd:        9 events:       19 data: 74253d2500000009
+tfd:        7 events:       19 data: 74253d2500000007
+```
+
+Each of the lines beginning `tfd` describes one of the file descriptors being monitored via the epoll file descriptor (see `epoll_ctl` for some details).  The `tfd` field is the number of the  file  descriptor. 
+
+For `signalfd` file descriptors (see `signalfd`), we see the following fields:
+```
+pos: 0
+flags:    02
+mnt_id:   10
+sigmask:  0000000000000006
+```
+
+`sigmask` is the hexadecimal mask of signals that are accepted via this `signalfd` file descriptor.  (In this example, bits 2 and 3 are set, corresponding to the signals `SIGINT` and `SIGQUIT`; see `signal`.)
+
+### /proc/[pid]/io
+This file contains I/O statistics for the process, for example:
+```
+# cat /proc/3828/io
+rchar: 323934931 // The  number  of bytes which this task has caused to be read from storage.  
+                 //This is simply the sum of bytes which this process passed to read(2) and similar system calls. 
+                 // It includes things such as terminal I/O and is unaffected by whether or not actual physical disk I/O was required
+wchar: 323929600 // The number of bytes which this task has caused, or shall cause to be written to disk.  Similar caveats apply here as with rchar.
+syscr: 632687    // Attempt to count the number of read I/O operations—that is, system calls such as read(2) and pread(2).
+syscw: 632675    // Attempt to count the number of write I/O operations—that is, system calls such as write(2) and pwrite(2).
+read_bytes: 0    // Attempt to count the number of bytes which this process really did cause to be fetched from the storage layer.  
+                 // This is accurate for block-backed filesystems.
+write_bytes: 323932160 //  Attempt to count the number of bytes which this process caused to be sent to the storage layer.
+cancelled_write_bytes: 0
+```
+
+### /proc/[pid]/maps
+A file containing the currently mapped memory regions and their access permissions.  See `mmap` for some further information about memory mappings.
+
+The format of the file is:
+```
+address           perms offset  dev   inode       pathname
+00400000-00452000 r-xp 00000000 08:02 173521      /usr/bin/dbus-daemon
+00651000-00652000 r--p 00051000 08:02 173521      /usr/bin/dbus-daemon
+00652000-00655000 rw-p 00052000 08:02 173521      /usr/bin/dbus-daemon
+00e03000-00e24000 rw-p 00000000 00:00 0           [heap]
+00e24000-011f7000 rw-p 00000000 00:00 0           [heap]
+...
+35b1800000-35b1820000 r-xp 00000000 08:02 135522  /usr/lib64/ld-2.15.so
+35b1a1f000-35b1a20000 r--p 0001f000 08:02 135522  /usr/lib64/ld-2.15.so
+35b1a20000-35b1a21000 rw-p 00020000 08:02 135522  /usr/lib64/ld-2.15.so
+35b1a21000-35b1a22000 rw-p 00000000 00:00 0
+35b1c00000-35b1dac000 r-xp 00000000 08:02 135870  /usr/lib64/libc-2.15.so
+35b1dac000-35b1fac000 ---p 001ac000 08:02 135870  /usr/lib64/libc-2.15.so
+35b1fac000-35b1fb0000 r--p 001ac000 08:02 135870  /usr/lib64/libc-2.15.so
+35b1fb0000-35b1fb2000 rw-p 001b0000 08:02 135870  /usr/lib64/libc-2.15.so
+...
+f2c6ff8c000-7f2c7078c000 rw-p 00000000 00:00 0    [stack:986]
+...
+7fffb2c0d000-7fffb2c2e000 rw-p 00000000 00:00 0   [stack]
+7fffb2d48000-7fffb2d49000 r-xp 00000000 00:00 0   [vdso]
+```
+
+The address field is the address space in the process that the mapping occupies. The perms field is a set of permissions:
+```
+r = read
+w = write
+x = execute
+s = shared
+p = private (copy on write)
+```
+
+The offset field is the offset into the file/whatever; dev is the device (major:minor); inode is the inode on that device.  0 indicates that no inode is associated with the memory region, as would be the case with BSS (uninitialized data).
+
+The pathname field will usually be the file that is backing the mapping.  For ELF files, you can easily coordinate with the offset field by looking at the Offset field in the ELF program headers (readelf -l).
+
+There are additional helpful pseudo-paths:
+```
+     [stack]
+            The initial process's (also known as the main thread's) stack.
+
+     [stack:<tid>] (since Linux 3.4)
+            A thread's stack (where the <tid> is a thread ID).  It corresponds to the /proc/[pid]/task/[tid]/ path.
+
+     [vdso] The virtual dynamically linked shared object.
+
+     [heap] The process's heap.
+```
+
+If  the  pathname  field  is  blank,  this  is  an  anonymous  mapping as obtained via the `mmap` function.  There is no easy way to coordinate this back to a process's source, short of running it through `gdb`, `strace`, or similar.
+
+
+### /proc/[pid]/mountinfo
+This file contains information about mount points.
+
+### /proc/[pid]/mounts
+This  is a list of all the filesystems currently mounted in the process's mount namespace.
+
+### /proc/[pid]/mountstats
+This file exports information (statistics, configuration information) about the mount points in the process's mount namespace.
+
+### /proc/[pid]/oom_adj
+This  file can be used to adjust the score used to select which process should be killed in an out-of-memory (OOM) situation.
+
+### /proc/[pid]/oom_score
+This  file  displays  the  current score that the kernel gives to this process for the purpose of selecting a process for the OOM-killer.
+
+### /proc/[pid]/pagemap
+This file shows the mapping of each of the process's virtual pages into physical page frames or swap area.  It contains one 64-bit value for each virtual page, with the bits set as follows:
+```
+63     If set, the page is present in RAM.
+62     If set, the page is in swap space
+61     The page is a file-mapped page or a shared anonymous page.
+54-0   If the page is present in RAM (bit 63), then these bits provide the page frame number, which can be used to index /proc/kpageflags and /proc/kpagecount.
+       If the page is present in swap (bit  62),  then bits 4-0 give the swap type, and bits 54-5 encode the swap offset.
+```
+To employ `/proc/[pid]/pagemap` efficiently, use `/proc/[pid]/maps` to determine which areas of memory are actually mapped and seek to skip over unmapped regions.
+
+### /proc/[pid]/root
+UNIX  and Linux support the idea of a per-process root of the filesystem, set by the `hroot` ystem call.  This file is a symbolic link that points to the process's root directory.
+
+### /proc/[pid]/smaps
+This  file  shows  memory consumption for each of the process's mappings.  (The pmap(1) command displays similar information, in a form that may be easier for parsing.)  For each mapping there is a series of lines such as the following:
+```
+00400000-0048a000 r-xp 00000000 fd:03 960637       /bin/bash
+Size:                552 kB
+Rss:                 460 kB
+Pss:                 100 kB
+Shared_Clean:        452 kB
+Shared_Dirty:          0 kB
+Private_Clean:         8 kB
+Private_Dirty:         0 kB
+Referenced:          460 kB
+Anonymous:             0 kB
+AnonHugePages:         0 kB
+Swap:                  0 kB
+KernelPageSize:        4 kB
+MMUPageSize:           4 kB
+Locked:                0 kB
+```
+
+The first of these lines shows the same information as is displayed for the mapping in /proc/[pid]/maps.  The remaining lines show the size of the mapping, the amount of the mapping that is currently  resident  in RAM  ("Rss"), the process' proportional share of this mapping ("Pss"), the number of clean and dirty shared pages in the mapping, and the number of clean and dirty private pages in the mapping.  "Referenced" indicates the amount of memory currently marked as referenced or accessed.  "Anonymous" shows the amount of memory that does not belong to any file.  "Swap" shows how much would-be-anonymous memory is also  used,  but out on swap.
+
+The "KernelPageSize" entry is the page size used by the kernel to back a VMA.  This matches the size used by the MMU in the majority of cases.  However, one counter-example occurs on PPC64 kernels whereby a kernel using 64K as a base page size may still use 4K pages for the MMU on older processors.  To distinguish, this patch reports "MMUPageSize" as the page size used by the MMU.
+
+The "Locked" indicates whether the mapping is locked in memory or not.
+
+"VmFlags" field represents the kernel flags associated with the particular virtual memory area in two letter encoded manner.  The codes are the following:
+```
+rd  - readable
+wr  - writable
+ex  - executable
+sh  - shared
+mr  - may read
+mw  - may write
+me  - may execute
+ms  - may share
+gd  - stack segment grows down
+pf  - pure PFN range
+dw  - disabled write to the mapped file
+lo  - pages are locked in memory
+io  - memory mapped I/O area
+sr  - sequential read advise provided
+rr  - random read advise provided
+dc  - do not copy area on fork
+de  - do not expand area on remapping
+ac  - area is accountable
+nr  - swap space is not reserved for the area
+ht  - area uses huge tlb pages
+nl  - non-linear mapping
+ar  - architecture specific flag
+dd  - do not include area into core dump
+sd  - soft-dirty flag
+mm  - mixed map area
+hg  - huge page advise flag
+nh  - no-huge page advise flag
+mg  - mergeable advise flag
+```
+ 
+### /proc/[pid]/stack
+This file provides a symbolic trace of the function calls in this process's kernel stack.
+
+```
+[<c006cb50>] futex_wait_queue_me+0xf4/0x158
+[<c006d318>] futex_wait+0xf0/0x250
+[<c006ec54>] do_futex+0xd4/0xa5c
+[<c006f720>] SyS_futex+0x144/0x164
+[<c000e87c>] __sys_trace_return+0x0/0x24
+[<ffffffff>] 0xffffffff
+```
+
+### /proc/[pid]/stat
+Status information about the process. This is used by `ps`.  It is defined in the kernel source file fs/proc/array.c.
+
+###  /proc/[pid]/statm
+Provides information about memory usage, measured in pages.  The columns are:
+```
+size       (1) total program size
+           (same as VmSize in /proc/[pid]/status)
+resident   (2) resident set size
+           (same as VmRSS in /proc/[pid]/status)
+share      (3) shared pages (i.e., backed by a file)
+text       (4) text (code)
+lib        (5) library
+data       (6) data + stack
+dt         (7) dirty pages
+```
+
+```
+cat statm
+43740 2020 1642 175 0 37596 0
+```
+
+
+
+
+ 
+ 
+ 
 ### Virtual file that reports the amount of available and used memory.
 
 ```

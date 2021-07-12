@@ -1,6 +1,28 @@
 
+## Process information pseudo-filesystem (/proc)
 
-Virtual file that reports the amount of available and used memory.
+The proc filesystem is a pseudo-filesystem which provides an interface to kernel data structures.  It is commonly mounted at /proc.  Most of it is read-only, but some files allow kernel variables to be changed.
+
+### /proc/[pid]/cmdline
+This  read-only file holds the complete command line for the process, unless the process is a zombie.
+
+### /proc/[pid]/coredump_filter
+See "man core"
+
+### /proc/[pid]/cpuset
+See "man cpuset"
+
+### /proc/[pid]/cwd
+This is a symbolic link to the current working directory of the process.  To find out the current working directory of process 20, for instance, you can do this:\
+` $ cd /proc/20/cwd; /bin/pwd`
+
+### /proc/[pid]/environ
+This file contains the environment for the process. The entries are separated by null bytes ('\0'), and there may be a null byte at the end. 
+Thus, to print out the environment of process 1, you would do:\
+`$ strings /proc/1/environ`
+
+
+### Virtual file that reports the amount of available and used memory.
 
 ```
 cat /proc/meminfo
@@ -53,6 +75,9 @@ DirectMap2M:     8785920 kB
 DirectMap1G:     2097152 kB
 
 ```
+
+
+## Virtual file that reports the amount of available and used memory.
 
 ```
 free

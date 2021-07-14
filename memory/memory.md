@@ -386,15 +386,36 @@ $ cat /proc/$$/status
 ``` 
  
 ### /proc/[pid]/task
+This is a directory that contains one subdirectory for each thread in the process.\
 The name of each subdirectory is the numerical thread ID of the thread.
- 
-### Virtual file that reports the amount of available and used memory.
+
+ Within each of these subdirecto‐ries,  there  is a set of files with the same names and contents as under the /proc/[pid] directories.\
+ For attributes that are shared by all threads, the contents for each of the files under the task/[tid] subdi‐rectories will be the same as in the corresponding file in the parent /proc/[pid] directory (e.g., in a multithreaded process, all of the task/[tid]/cwd files will have the same value as the  /proc/[pid]/cwd file in  the  parent  directory,  since  all of the threads in a process share a working directory).
+
+
+### /proc/cmdline
+Arguments passed to the Linux kernel at boot time.  Often done via a boot manager such as lilo(8) or grub(8).
+
+```
+cat /proc/cmdline
+console=ttyHSL0 noinitrd loglevel=4 ubi.mtd=? rootfstype=ubifs ro systemd.show_status=false ima_appraise=log evm=fix androidboot.hardware=qcom ehci-hcd.park=3 msm_rtb.filter=0x37 lpm_levels.sleep_disabled=1 androidboot.serialno=61cb94e3 androidboot.baseband=msm bank_selection=0
+```
+
+### /proc/cpuinfo
+This is a collection of CPU and system architecture dependent items, for each supported architecture a different list.
+
+### /proc/meminfo
+Virtual file that reports the amount of available and used memory.
 
 ```
 cat /proc/meminfo
 
+Total usable RAM (i.e., physical RAM minus a few reserved bits and the kernel binary code)
 MemTotal:       10797240 kB
+
+The sum of LowFree+HighFree
 MemFree:         3904600 kB
+
 MemAvailable:    8335240 kB
 Buffers:          243076 kB
 Cached:          4309968 kB
@@ -409,8 +430,13 @@ Unevictable:          32 kB
 Mlocked:              32 kB
 SwapTotal:        999420 kB
 SwapFree:         578048 kB
+
+Memory which is waiting to get written back to the disk
 Dirty:                20 kB
+
+Memory which is actively being written back to the disk.
 Writeback:             0 kB
+
 AnonPages:       1902596 kB
 Mapped:           127552 kB
 Shmem:             19216 kB
@@ -424,9 +450,16 @@ Bounce:                0 kB
 WritebackTmp:          0 kB
 CommitLimit:     6398040 kB
 Committed_AS:    4620760 kB
+
+Total size of vmalloc memory area.
 VmallocTotal:   34359738367 kB
+
+Amount of vmalloc area which is used.
 VmallocUsed:           0 kB
+
+Largest contiguous block of vmalloc area which is free.
 VmallocChunk:          0 kB
+
 HardwareCorrupted:     0 kB
 AnonHugePages:         0 kB
 CmaTotal:              0 kB
@@ -442,8 +475,47 @@ DirectMap1G:     2097152 kB
 
 ```
 
+### /proc/fs
+Contains subdirectories that in turn contain files with information about (certain) mounted filesystems.
 
-## Virtual file that reports the amount of available and used memory.
+```
+$ ls /proc/fs
+aufs  ext4  jbd2  nfsd
+```
+
+### /proc/iomem
+I/O memory map
+
+
+### /proc/modules
+A text list of the modules that have been loaded by the system.  See also lsmod(8).
+
+
+### /proc/mounts
+A link to /proc/self/mounts, which lists the mount points of the process's own mount namespace.  The format of this file is documented in fstab(5).
+
+### /proc/net/arp
+his holds an ASCII readable dump of the kernel ARP table used for address resolutions.  It will show both dynamically learned and preprogrammed ARP entries.  The format is:
+```
+IP address     HW type   Flags     HW address          Mask   Device
+192.168.0.50   0x1       0x2       00:50:BF:25:68:F3   *      eth0
+192.168.0.250  0x1       0xc       00:00:00:00:00:00   *      eth0
+```
+ere  "IP  address"  is  the  IPv4  address  of  the  machine  and  the  "HW  type"  is  the  hardware  type  of  the  address  from  RFC 826.   The flags are the internal flags of the ARP structure (as defined in /usr/include/linux/if_arp.h) and the "HW address" is the data link layer mapping for that IP address if it is known.
+
+### /proc/net/dev
+The dev pseudo-file contains network device status information.  This gives the number of received and sent packets, the number of errors and collisions and other basic statistics.  These are used  by  the  ifcon‐fig(8) program to report device status.  The format is:
+
+```
+ Inter-|   Receive                                                |  Transmit
+  face |bytes    packets errs drop fifo frame compressed multicast|bytes    packets errs drop fifo colls carrier compressed
+     lo: 2776770   11307    0    0    0     0          0         0  2776770   11307    0    0    0     0       0          0
+   eth0: 1215645    2751    0    0    0     0          0         0  1782404    4324    0    0    0   427       0          0
+   ppp0: 1622270    5552    1    0    0     0          0         0   354130    5669    0    0    0     0       0          0
+   tap0:    7714      81    0    0    0     0          0         0     7714      81    0    0    0     0       0          0
+```
+
+
 
 ```
 free

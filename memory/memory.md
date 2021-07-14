@@ -272,9 +272,9 @@ Status information about the process. This is used by `ps`.  It is defined in th
 Provides information about memory usage, measured in pages.  The columns are:
 ```
 size       (1) total program size
-           (same as VmSize in /proc/[pid]/status)
+           (same as VmSize in /proc/[pid]/status, measured in pages)
 resident   (2) resident set size
-           (same as VmRSS in /proc/[pid]/status)
+           (same as VmRSS in /proc/[pid]/status, measured in pages)
 share      (3) shared pages (i.e., backed by a file)
 text       (4) text (code)
 lib        (5) library
@@ -287,11 +287,106 @@ cat statm
 43740 2020 1642 175 0 37596 0
 ```
 
-
-
-
+### /proc/[pid]/status
+Provides much of the information in /proc/[pid]/stat and /proc/[pid]/statm in a format that's easier for humans to parse.  Here's an example:
+```
+$ cat /proc/$$/status
+    * Name: Command run by this process.
+    Name:   bash
+    
+    * State: Current state of the process.  One of "R (running)", "S (sleeping)", "D (disk sleep)", "T (stopped)", "T (tracing stop)", "Z (zombie)", or "X (dead)".
+    State:  S (sleeping)
+    
+    * Tgid: Thread group ID (i.e., Process ID).
+    Tgid:   3515
+    
+    * Pid: Thread ID (see gettid(2)).
+    Pid:    3515
+    
+    * PPid: PID of parent process.
+    PPid:   3452
+    
+    TracerPid:      0
+    
+    * Uid, Gid: Real, effective, saved set, and filesystem UIDs (GIDs).
+    Uid:    1000    1000    1000    1000
+    Gid:    100     100     100     100
+    
+    * FDSize: Number of file descriptor slots currently allocated.
+    FDSize: 256
+    
+    Groups: 16 33 100
+    
+    * VmPeak: Peak virtual memory size
+    VmPeak:     9136 kB
+    
+    * VmSize: Virtual memory size.
+    VmSize:     7896 kB
+    
+    * VmLck: Locked memory size (see mlock(3))
+    VmLck:         0 kB
+    
+    * VmPin: Pinned memory size. These are pages that can't be moved because something needs to directly access physical memory.
+    VmPin:         0 kB
+    
+    * VmHWM: Peak resident set size ("high water mark").
+    VmHWM:      7572 kB
+    
+    * VmRSS: Resident set size.
+    VmRSS:      6316 kB
+    
+    * VmData, VmStk, VmExe: Size of data, stack, and text segments.
+    VmData:     5224 kB
+    VmStk:        88 kB
+    VmExe:       572 kB
+    
+    * VmLib: Shared library code size.
+    VmLib:      1708 kB
+       
+    * VmPTE: Page table entries size
+    VmPTE:        20 kB
+    
+    * VmPMD: Size of second-level page tables
+    VmPMD:         4 kB
+    
+    * VmSwap: Swapped-out virtual memory size by anonymous private pages; shmem swap usage is not included
+    VmSwap:        0 kB
+    
+    * Threads: Number of threads in process containing this thread.
+    Threads:        1
+    
+    SigQ:   0/3067
+    SigPnd: 0000000000000000
+    ShdPnd: 0000000000000000
+    SigBlk: 0000000000010000
+    SigIgn: 0000000000384004
+    SigCgt: 000000004b813efb
+    CapInh: 0000000000000000
+    CapPrm: 0000000000000000
+    CapEff: 0000000000000000
+    CapBnd: ffffffffffffffff
+    CapAmb:   0000000000000000
+    Seccomp:        0
+    
+    * Cpus_allowed: Mask of CPUs on which this process may run
+    Cpus_allowed:   00000001
+    
+    * Cpus_allowed_list: Same as previous, but in "list format"
+    Cpus_allowed_list:      0
+    
+    * Mems_allowed: Mask of memory nodes allowed to this process
+    Mems_allowed:   1
+    
+    * Mems_allowed_list: Same as previous, but in "list format" 
+    Mems_allowed_list:      0
+    
+    * voluntary_ctxt_switches, nonvoluntary_ctxt_switches: Number of voluntary and involuntary context switches
+    voluntary_ctxt_switches:        150
+    nonvoluntary_ctxt_switches:     545
+``` 
  
- 
+### /proc/[pid]/task
+The name of each subdirectory is the numerical thread ID of the thread.
  
 ### Virtual file that reports the amount of available and used memory.
 

@@ -46,30 +46,36 @@ Most of it is read-only, but some files allow kernel variables to be changed.
 ### /proc/[pid]/cmdline
 This  read-only file holds the complete command line for the process, unless the process is a zombie.
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/coredump_filter
 See "man core"
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/cpuset
 See "man cpuset"
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/cwd
 This is a symbolic link to the current working directory of the process.  To find out the current working directory of process 20, for instance, you can do this:\
 ` $ cd /proc/20/cwd; /bin/pwd`
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/environ
 This file contains the environment for the process. The entries are separated by null bytes ('\0'), and there may be a null byte at the end. 
 Thus, to print out the environment of process 1, you would do:\
 `$ strings /proc/1/environ`
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/exe
 This file is a symbolic link containing the actual pathname of the executed command.
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/fd/
 This is a subdirectory containing one entry for each file which the process has open, named by its file descriptor, and which is a symbolic link to the actual file.  Thus, 0 is standard input, 1 standard output, 2 standard error, and so on.
 
@@ -95,7 +101,8 @@ In some cases, the file-type is surrounded by square brackets.
 
 For example, an epoll file descriptor will have a symbolic link whose content is the string `anon_inode:[eventpoll]`.
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/fdinfo/ 
 This is a subdirectory containing one entry for each file which the process has open, named by its file descriptor. The files in this directory are readable only by the owner of the process. The contents of each file can be read to obtain information about the corresponding file descriptor. The content depends on the type of file referred to by the corresponding descriptor.
  
@@ -141,7 +148,8 @@ sigmask:  0000000000000006
 
 `sigmask` is the hexadecimal mask of signals that are accepted via this `signalfd` file descriptor.  (In this example, bits 2 and 3 are set, corresponding to the signals `SIGINT` and `SIGQUIT`; see `signal`.)
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/io
 This file contains I/O statistics for the process, for example:
 ```
@@ -158,7 +166,8 @@ write_bytes: 323932160 //  Attempt to count the number of bytes which this proce
 cancelled_write_bytes: 0
 ```
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/maps
 A file containing the currently mapped memory regions and their access permissions.  See `mmap` for some further information about memory mappings.
 
@@ -214,22 +223,27 @@ There are additional helpful pseudo-paths:
 
 If  the  pathname  field  is  blank,  this  is  an  anonymous  mapping as obtained via the `mmap` function.  There is no easy way to coordinate this back to a process's source, short of running it through `gdb`, `strace`, or similar.
 
+[top](#content)
 
-[top](#content)\
 ### /proc/[pid]/mountinfo
 This file contains information about mount points.
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/mounts
 This  is a list of all the filesystems currently mounted in the process's mount namespace.
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/mountstats
 This file exports information (statistics, configuration information) about the mount points in the process's mount namespace.
 
-[top](#content)\
+[top](#content)
+
 ### /proc/[pid]/oom_adj
 This  file can be used to adjust the score used to select which process should be killed in an out-of-memory (OOM) situation.
+
+[top](#content)
 
 ### /proc/[pid]/oom_score
 This  file  displays  the  current score that the kernel gives to this process for the purpose of selecting a process for the OOM-killer.

@@ -9,7 +9,7 @@ It can also be mounted manually using a command such as:\
 Most of it is read-only, but some files allow kernel variables to be changed.
 
 
-[/proc/[pid]/cmdline](#/proc/[pid]/cmdline)
+[/proc/[pid]/cmdline](#/proc/[pid]/stat)
 
 
 ### /proc/[pid]/cmdline

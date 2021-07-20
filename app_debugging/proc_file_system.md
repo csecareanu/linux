@@ -47,17 +47,14 @@ Most of it is read-only, but some files allow kernel variables to be changed.
 This  read-only file holds the complete command line for the process, unless the process is a zombie.
 
 [top](#content)
-
 ### /proc/[pid]/coredump_filter
 See "man core"
 
 [top](#content)
-
 ### /proc/[pid]/cpuset
 See "man cpuset"
 
 [top](#content)
-
 ### /proc/[pid]/cwd
 This is a symbolic link to the current working directory of the process.  To find out the current working directory of process 20, for instance, you can do this:\
 ` $ cd /proc/20/cwd; /bin/pwd`

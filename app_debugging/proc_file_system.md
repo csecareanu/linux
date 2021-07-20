@@ -47,14 +47,17 @@ Most of it is read-only, but some files allow kernel variables to be changed.
 This  read-only file holds the complete command line for the process, unless the process is a zombie.
 
 [top](#content)
+
 ### /proc/[pid]/coredump_filter
 See "man core"
 
 [top](#content)
+
 ### /proc/[pid]/cpuset
 See "man cpuset"
 
 [top](#content)
+
 ### /proc/[pid]/cwd
 This is a symbolic link to the current working directory of the process.  To find out the current working directory of process 20, for instance, you can do this:\
 ` $ cd /proc/20/cwd; /bin/pwd`
@@ -245,6 +248,9 @@ This  file can be used to adjust the score used to select which process should b
 ### /proc/[pid]/oom_score
 This  file  displays  the  current score that the kernel gives to this process for the purpose of selecting a process for the OOM-killer.
 
+
+[top](#content)
+
 ### /proc/[pid]/pagemap
 This file shows the mapping of each of the process's virtual pages into physical page frames or swap area.  It contains one 64-bit value for each virtual page, with the bits set as follows:
 ```
@@ -256,8 +262,14 @@ This file shows the mapping of each of the process's virtual pages into physical
 ```
 To employ `/proc/[pid]/pagemap` efficiently, use `/proc/[pid]/maps` to determine which areas of memory are actually mapped and seek to skip over unmapped regions.
 
+
+[top](#content)
+
 ### /proc/[pid]/root
 UNIX  and Linux support the idea of a per-process root of the filesystem, set by the `hroot` ystem call.  This file is a symbolic link that points to the process's root directory.
+
+
+[top](#content)
 
 ### /proc/[pid]/smaps
 This  file  shows  memory consumption for each of the process's mappings.  (The pmap(1) command displays similar information, in a form that may be easier for parsing.)  For each mapping there is a series of lines such as the following:
@@ -316,7 +328,10 @@ hg  - huge page advise flag
 nh  - no-huge page advise flag
 mg  - mergeable advise flag
 ```
- 
+
+
+[top](#content)
+
 ### /proc/[pid]/stack
 This file provides a symbolic trace of the function calls in this process's kernel stack.
 
@@ -329,8 +344,14 @@ This file provides a symbolic trace of the function calls in this process's kern
 [<ffffffff>] 0xffffffff
 ```
 
+
+[top](#content)
+
 ### /proc/[pid]/stat
 Status information about the process. This is used by `ps`.  It is defined in the kernel source file fs/proc/array.c.
+
+
+[top](#content)
 
 ### /proc/[pid]/statm
 Provides information about memory usage, measured in pages.  The columns are:
@@ -350,6 +371,9 @@ dt         (7) dirty pages
 cat statm
 43740 2020 1642 175 0 37596 0
 ```
+
+
+[top](#content)
 
 ### /proc/[pid]/status
 Provides much of the information in /proc/[pid]/stat and /proc/[pid]/statm in a format that's easier for humans to parse.  Here's an example:
@@ -448,7 +472,10 @@ $ cat /proc/$$/status
     voluntary_ctxt_switches:        150
     nonvoluntary_ctxt_switches:     545
 ``` 
- 
+
+
+[top](#content)
+
 ### /proc/[pid]/task
 This is a directory that contains one subdirectory for each thread in the process.\
 The name of each subdirectory is the numerical thread ID of the thread.
@@ -456,6 +483,8 @@ The name of each subdirectory is the numerical thread ID of the thread.
  Within each of these subdirecto‐ries,  there  is a set of files with the same names and contents as under the /proc/[pid] directories.\
  For attributes that are shared by all threads, the contents for each of the files under the task/[tid] subdi‐rectories will be the same as in the corresponding file in the parent /proc/[pid] directory (e.g., in a multithreaded process, all of the task/[tid]/cwd files will have the same value as the  /proc/[pid]/cwd file in  the  parent  directory,  since  all of the threads in a process share a working directory).
 
+
+[top](#content)
 
 ### /proc/cmdline
 Arguments passed to the Linux kernel at boot time.  Often done via a boot manager such as lilo(8) or grub(8).
@@ -465,8 +494,12 @@ cat /proc/cmdline
 console=ttyHSL0 noinitrd loglevel=4 ubi.mtd=? rootfstype=ubifs ro systemd.show_status=false ima_appraise=log evm=fix androidboot.hardware=qcom ehci-hcd.park=3 msm_rtb.filter=0x37 lpm_levels.sleep_disabled=1 androidboot.serialno=61cb94e3 androidboot.baseband=msm bank_selection=0
 ```
 
+[top](#content)
+
 ### /proc/cpuinfo
 This is a collection of CPU and system architecture dependent items, for each supported architecture a different list.
+
+[top](#content)
 
 ### /proc/meminfo
 Virtual file that reports the amount of available and used memory.
@@ -539,6 +572,8 @@ DirectMap1G:     2097152 kB
 
 ```
 
+[top](#content)
+
 ### /proc/fs
 Contains subdirectories that in turn contain files with information about (certain) mounted filesystems.
 
@@ -547,16 +582,24 @@ $ ls /proc/fs
 aufs  ext4  jbd2  nfsd
 ```
 
+[top](#content)
+
 ### /proc/iomem
 I/O memory map
 
+
+[top](#content)
 
 ### /proc/modules
 A text list of the modules that have been loaded by the system.  See also lsmod(8).
 
 
+[top](#content)
+
 ### /proc/mounts
 A link to /proc/self/mounts, which lists the mount points of the process's own mount namespace.  The format of this file is documented in fstab(5).
+
+[top](#content)
 
 ### /proc/net/arp
 his holds an ASCII readable dump of the kernel ARP table used for address resolutions.  It will show both dynamically learned and preprogrammed ARP entries.  The format is:
@@ -566,6 +609,8 @@ IP address     HW type   Flags     HW address          Mask   Device
 192.168.0.250  0x1       0xc       00:00:00:00:00:00   *      eth0
 ```
 ere  "IP  address"  is  the  IPv4  address  of  the  machine  and  the  "HW  type"  is  the  hardware  type  of  the  address  from  RFC 826.   The flags are the internal flags of the ARP structure (as defined in /usr/include/linux/if_arp.h) and the "HW address" is the data link layer mapping for that IP address if it is known.
+
+[top](#content)
 
 ### /proc/net/dev
 The dev pseudo-file contains network device status information.  This gives the number of received and sent packets, the number of errors and collisions and other basic statistics.  These are used  by  the  ifcon‐fig(8) program to report device status.  The format is:

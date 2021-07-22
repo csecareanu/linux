@@ -1,3 +1,11 @@
+The problem is that the numbers exported by the current kernels are nearly meaningless. The reported `virtual size` of an application is nearly irrelevant; it says nothing about how much of that virtual space is actually being used.\
+The `resident set size` (RSS) number is a little better, but there is no information on sharing of pages there.\
+The `/proc/pid/smaps` file gives a bit of detail, but also lacks sharing information. 
+
+ The "proportional set size" (PSS) of a process is the count of pages it has in memory, where each page is divided by the number of processes sharing it. So if a process has 1000 pages all to itself, and 1000 shared with one other process, its PSS will be 1500. The unique set size (USS), instead, is a simple count of unshared pages. It is, for all practical purposes, the number of pages which will be returned to the system if the process is killed. 
+
+
+
 ```
 free
 

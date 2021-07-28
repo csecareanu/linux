@@ -44,6 +44,14 @@ _For a single process, in general, the memory size is sorted as follows: VSS >= 
 ![vss/rss/pss/uss](./vss_rss_pss_uss.jpg)
     
 
+* VSS = 1 + 2 + 3
+* RSS = 4 + 5 + 6
+* PSS = 4/3 + 5/2 + 6
+* USS = 6
+
+The 4 memory in the figure above is the part of the libc code segment that resides in the memory and is shared by 3 processes; the 5 memory is the bash code segment and is pointed to by 2 processes (1044 and 1045). When calculating PSS, these need to be scaled.
+    
+    
 ```
 free
 

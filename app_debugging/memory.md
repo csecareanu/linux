@@ -1,4 +1,37 @@
 
+## Page
+**A page, memory page, or virtual page is a fixed-length contiguous block of virtual memory, described by a single entry in the page table.**
+
+It is the smallest unit of data for memory management in a virtual memory operating system. Similarly, a **page frame** is the smallest fixed-length contiguous block of physical memory into which memory pages are mapped by the operating system.\
+A transfer of pages between main memory and an auxiliary store, such as a hard disk drive, is referred to as paging or swapping.
+
+**Page size** is usually determined by the processor architecture. Traditionally, pages in a system had uniform size, such as 4,096 bytes
+
+**Internal fragmentation:** As an example, assume the page size is 1024 KB. If a process allocates 1025 KB, two pages must be used, resulting in 1023 KB of unused space (where one page fully consumes 1024 KB and the other only 1 KB). 
+
+**Sharing:** In multi-programming or in a multi-user environment, many users may execute the same program, written so that its code and data are in separate pages. To minimize RAM use, all users share a single copy of the program. Each process's page table is set up so that the pages that address code point to the single shared copy, while the pages that address data point to different physical pages for each process.\
+Different programs might also use the same libraries. To save space, only one copy of the shared library is loaded into physical memory. Programs which use the same library have virtual addresses that map to the same pages (which contain the library's code and data). When programs want to modify the library's code, they use copy-on-write, so memory is only allocated when needed.\
+Shared memory is an efficient way of communication between programs. Programs can share pages in memory, and then write and read to exchange data. 
+
+
+## Page table
+**A page table is the data structure used by a virtual memory system to store the mapping between virtual addresses and physical addresses.**
+
+Virtual addresses are used by the program executed by the accessing process, while physical addresses are used by the hardware, or more specifically, by the RAM subsystem. The page table is a key component of virtual address translation which is necessary to access data in memory. 
+
+### Role of the page table
+In operating systems that use virtual memory, every process is given the impression that it is working with large, contiguous sections of memory. Physically, the memory of each process may be dispersed across different areas of physical memory, or may have been moved (paged out) to another storage, typically to a hard disk drive or solid state drive. 
+
+When a process requests access to data in its memory, it is the responsibility of the operating system to map the virtual address provided by the process to the physical address of the actual memory where that data is stored. The page table is where the operating system stores its mappings of virtual addresses to physical addresses, with each mapping also known as a page table entry (PTE).
+
+The CPU's memory management unit (MMU) stores a cache of recently used mappings from the operating system's page table. This is called the translation lookaside buffer (TLB), which is an associative cache.\
+When a virtual address needs to be translated into a physical address, the TLB is searched first.
+
+## Memory paging
+**Memory paging is a memory management scheme by which a computer stores and retrieves data from secondary storage for use in main memory.**
+
+In this scheme, the operating system retrieves data from secondary storage in same-size blocks called _pages_.
+
 ## VSS
 **Virtual Set Size virtual memory consumption (including virtual memory shared with other processes)**
 

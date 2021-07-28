@@ -17,50 +17,37 @@ The difference between PSS and RSS is that, for the memory shared between proces
 PSS is a very useful number, because when the PSS of all processes in the system are added together, it can well represent the total memory usage in the system.\
 When a process is terminated, the shared library of PSS contributed to it will be proportionally allocated to the total number of PSS of other processes that still use the library. In this way, **PSS may be a bit misleading**, because when the process is terminated, PSS cannot accurately represent the memory returned to the entire system.
 
-    
 
 ## USS
-Unique Set Size physical memory occupied by the process alone (does not include memory shared with other processes)
+**Unique Set Size physical memory occupied by the process alone (does not include memory shared with other processes)**
+
+USS indicates the total physical memory occupied by the process, which means that this part of the memory is completely exclusive to the process (it is not shared with any other). USS is a very useful number because it represents the actual incremental cost of running a particular process. When the process is terminated, the USS is the total memory actually returned to the system. **When initially suspecting a memory leak in a process, USS is the best monitoring number.**
+    
+    
+## NOTE: There are a few issues to note here
+
+* **The part shared by the two processes is far from only shared libraries. For example, if we open 2 bash processes in Linux, then **these 2 bashs actually share 1 code segment**; of course, the mapping of shared in other mmap() is of course also the memory shared by the two processes.**
+
+* **Not all of the memory in the shared library is shared, only the memory that does not do CoW (copy on write) such as code segments will be shared across processes.**
+
+* **USS removed all shared memory across processes, not just shared libraries.**
 
 
-    USS indicates the total physical memory occupied by the process, which means that this part of the memory is completely exclusive to the process. USS is a very useful number because it represents the actual incremental cost of running a particular process. When the process is terminated, the USS is the total memory actually returned to the system. When initially suspecting a memory leak in a process, USS is the best monitoring number.
-    Uss (unique set size): This is the amount of memory that is committed to physical memory and is unique to a process; it is not shared with any other. It is the amount of memory that would be freed if the process were to terminate.
-
-    Pss (proportional set size): This splits the accounting of shared pages that are committed to physical memory between all the processes that have them mapped. For example, if an area of library code is 12 pages long and is shared by six processes, each will accumulate two pages in Pss. Thus, if you add the Pss numbers for all processes, you will get the actual amount of memory being used by those processes. In other words, Pss is the number we have been looking for.
-
-
-The problem is that the numbers exported by the current kernels are nearly meaningless. The reported `virtual size` of an application is nearly irrelevant; it says nothing about how much of that virtual space is actually being used.\
-The `resident set size` (RSS) number is a little better, but there is no information on sharing of pages there.\
-The `/proc/pid/smaps` file gives a bit of detail, but also lacks sharing information. 
-
- The "proportional set size" (PSS) of a process is the count of pages it has in memory, where each page is divided by the number of processes sharing it. So if a process has 1000 pages all to itself, and 1000 shared with one other process, its PSS will be 1500. The unique set size (USS), instead, is a simple count of unshared pages. It is, for all practical purposes, the number of pages which will be returned to the system if the process is killed. 
-
-
-
-**NOTE: There are a few issues to note here：**
-
-    The part shared by the two processes is far from only shared libraries. For example, if we open 2 bash processes in Linux, then these 2 bashs actually share 1 code segment; of course, the mapping of shared in other mmap() is of course It is also the memory shared by the two processes.
-
-    Not all of the memory in the shared library is shared, only the memory that does not do CoW (copy on write) such as code segments will be shared across processes.
-
-    USS removed all shared memory across processes, not just shared libraries.
-
-
+## Example
 The following is an example to specifically analyze the relationship between various quantities. Assuming that there are two bash processes and one cat process under Linux, the process IDs are 1044, 1045, and 1054, respectively. The following formulas are used to calculate VSS, RSS, PSS, and USS:
-
-
 
 _For a single process, in general, the memory size is sorted as follows: VSS >= RSS >= PSS >= USS_
 ![vss/rss/pss/uss](./vss_rss_pss_uss.jpg)
     
-
 * VSS = 1 + 2 + 3
 * RSS = 4 + 5 + 6
 * PSS = 4/3 + 5/2 + 6
 * USS = 6
 
 The 4 memory in the figure above is the part of the libc code segment that resides in the memory and is shared by 3 processes; the 5 memory is the bash code segment and is pointed to by 2 processes (1044 and 1045). When calculating PSS, these need to be scaled.
+
     
+
     
 ```
 free

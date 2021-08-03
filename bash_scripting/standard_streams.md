@@ -21,7 +21,7 @@ These values are always used for _stdin_, _stdout_, and _stderr_:
 * 1: stdout
 * 2: stderr
 
-## Redirecting stdout and stderr
+## Redirect standard output and standard error (Redirecting stdout and stderr)
 There’s an advantage to having error messages delivered by a dedicated stream. \
 It means we can redirect a command’s output (stdout) to a file and still see any error messages (stderr) in the terminal window.
 Create a scripts named _error.sh_:
@@ -34,11 +34,12 @@ cat bad-filename.txt
 
 Make the script executable with this command: `chmod +x error.sh`
 
-The first line of the script echoes text to the terminal window, via the stdout stream. The second line tries to access a file that doesn’t exist. This will generate an error message that is delivered via stderr.
+The first line of the script echoes text to the terminal window, via the _stdout_ stream. The second line tries to access a file that doesn’t exist. This will generate an error message that is delivered via _stderr_.
 
 Run the script with this command: `./error.sh`\
 The console will display:
 ```
+$ ./error.sh
 About to try to access a file that doesn't exist
 cat: bad-filename.txt: No such file or directory
 ```
@@ -47,6 +48,7 @@ We can see that both streams of output, _stdout_ and _stderr_, have been display
 Let’s try to redirect the output to a file: `./error.sh > capture.txt`
 The console will display:
 ```
+$ ./error.sh > capture.txt
 cat: bad-filename.txt: No such file or directory
 ```
 The error message that is delivered via _stderr_ is still sent to the terminal window. 
@@ -54,9 +56,10 @@ We can check the contents of the file to see whether the _stdout_ output went to
 ```
 cat capture.txt
 ```
-The output from stdin was redirected to the file as expected:
+The output from _stdin_ was redirected to the file as expected:
 ```
-About to try to access a file that doesn't exist
+$ cat capture.txt
+cat: bad-filename.txt: No such file or directory
 ```
 
 The **>** redirection symbol works with _stdout_ by default. You can use one of the numeric file descriptors to indicate which standard output stream you wish to redirect.
@@ -70,4 +73,48 @@ To explicitly redirect  stderr, use this redirection instruction:
 2>
 ```
 
-Let’s try to our test again, and this time we’ll use 2>:
+Let’s try to our test again, and this time we’ll use `2>`:
+```
+./error.sh 2> capture.txt
+```
+The console will display:
+```
+$ ./error.sh 2> capture.txt
+About to try to access a file that doesn't exist
+```
+The error message is redirected and the _stdout_ `echo` message is sent to the terminal window:
+```
+About to try to access a file that doesn't exist
+```
+
+Let’s see what is in the `capture.txt` file.
+```
+$ cat capture.txt
+cat: bad-filename.txt: No such file or directory
+```
+
+## Redirect stdout and stderr (Redirecting Both stdout and stderr)
+This command will direct _stdout_ to a file called capture.txt and _stderr_ to a file called error.txt.
+```
+./error.sh 1> capture.txt 2> error.txt
+```
+Because both streams of output–standard output and standard error—are redirected to files, there is no visible output in the terminal window. We are returned to the command line prompt as though nothing has occurred.
+
+Let’s check the contents of each file:
+```
+$ cat capture.txt
+About to try to access a file that doesn't exist
+```
+```
+$ cat error.txt
+cat: bad-filename.txt: No such file or directory
+```
+
+## Redirect stdout and stderr to the same file (Redirecting stdout and stderr to the Same File)
+We’ve got each of the standard output streams going to its own dedicated file. The only other combination we can do is to send both _stdout_ and _stderr_ to the same file.
+
+We can use the following command to achieve:
+```
+./error.sh > capture.txt 2>&1
+```
+

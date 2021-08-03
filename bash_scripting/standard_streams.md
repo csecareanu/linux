@@ -1,4 +1,5 @@
 https://www.programmersought.com/article/16247338941/
+https://askubuntu.com/questions/420981/how-do-i-save-terminal-output-to-a-file
 
 # Standard streams
 

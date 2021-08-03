@@ -5,8 +5,7 @@ The three input/output (I/O) connections are called standard input (stdin), stan
 
 Data streams, like water streams, have two ends. 
 They have a source and an outflow. \
-Whichever Linux command you’re using provides one end of each stream. The other end is determined by the shell that launched the command. T
-hat end will be connected to the terminal window, connected to a pipe, or redirected to a file or other command, according to the command line that launched the command.
+Whichever Linux command you’re using provides one end of each stream. The other end is determined by the shell that launched the command. That end will be connected to the terminal window, connected to a pipe, or redirected to a file or other command, according to the command line that launched the command.
 
 In Linux, **stdin** is the standard input stream. This accepts text as its input. \
 Text output from the command to the shell is delivered via the **stdout** (standard out) stream. \

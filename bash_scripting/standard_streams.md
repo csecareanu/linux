@@ -1,3 +1,5 @@
+https://www.programmersought.com/article/16247338941/
+
 # Standard streams
 
 Standard streams are interconnected input and output communication channels between a computer program and its environment when it begins execution. 

@@ -1,6 +1,7 @@
 
 # Standard streams
 
+## Scurta introducere
 Iesirea unui comenzi rulate in "command line poate" fi:
 * afisata pe ecran
   * ex: `ls` - afiseaza pe ecran
@@ -37,6 +38,7 @@ Operatori:
 * "<" este operatorul de redirectare al intrarii
 * ">&" Redirecteaza iesirea unui fisier in altul
 
+## Standard streams
 Standard streams are interconnected input and output communication channels between a computer program and its environment when it begins execution. 
 The three input/output (I/O) connections are called standard input (stdin), standard output (stdout) and standard error (stderr).
 

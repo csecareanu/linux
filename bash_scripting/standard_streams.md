@@ -1,8 +1,27 @@
-https://www.programmersought.com/article/16247338941/
-
-https://askubuntu.com/questions/420981/how-do-i-save-terminal-output-to-a-file
 
 # Standard streams
+
+Iesirea unui comenzi rulate in command line poate fi:
+* afisata pe ecran
+  * ex: `ls` - afiseaza pe ecran
+* "redirected"
+  * ex: `ls > fisiere.txt` - scrie in fisierul _fisiere.txt_ si nu afiseaza pe ecran
+* piped
+  * ex: `ls | grep ....` - nu afiseaza pe ecran, ci trimipte prin "pipe" catre comanda grep. Comanda grep, la randul ei, poate sa afiseze rezultatul pe ecran, sa il scrie in fisier, sau sa il trimita prin "pipe" catre alta comanda.
+    * `ls | grep "..."` - afiseaza pe ecran
+    * `ls | grep "..." > rezultate.txt" - scrie in fisier
+    * `ls | grep "..." | sed ...` - trimite prin "pipe" catre comanda `sed`. Comanda send are, la randul ei, cele 3 optiuni de afisare.
+  
+
+Fiecare fisier in Linux are un File Descriptor asociat cu el.
+Un File Descriptor este un numar.
+
+Tastatura este Standard Input Device implicit.
+Ecranul este Standard Outpu Device implicit.
+">" este operatorul de redirectare a al iesirii
+">>" adauga date la un fisier deja existent
+"<" este operatorul de redirectare al intrarii
+">&" Redirecteaza iesirea unui fisier in altul
 
 Standard streams are interconnected input and output communication channels between a computer program and its environment when it begins execution. 
 The three input/output (I/O) connections are called standard input (stdin), standard output (stdout) and standard error (stderr).
@@ -122,6 +141,12 @@ To write the output from one file to the input of another file: `>&`.
 To redirect error output (_stderr_) to standard output (_stdout_) which in turn is redirected to file _capture.txt_:
 ```
 ./error.sh > capture.txt 2>&1
+```
+Both output _stderr_ and _stdout_ are redirected to _capture.txt_:
+```
+$ cat capture.txt
+About to try to access a file that doesn't exist
+cat: bad-filename.txt: No such file or directory
 ```
 
 

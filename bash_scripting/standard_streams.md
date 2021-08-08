@@ -38,6 +38,27 @@ Operatori:
 * "<" este operatorul de redirectare al intrarii
 * ">&" Redirecteaza iesirea unui fisier in altul
 
+## Summary
+`command > output.txt`: The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.
+ 
+`command >> output.txt`: The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+`command 2> output.txt`: The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.
+
+`command 2>> output.txt`: The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+`command &> output.txt` or `command > output.txt 2>&1`: Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, it gets overwritten.
+
+`command &>> output.txt` or `command >> output.txt 2>&1`: Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, the new data will get appended to the end of the file..
+
+`command | tee output.txt`: The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, it gets overwritten.
+
+`command | tee -a output.txt`: The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+`command |& tee output.txt`: Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, it gets overwritten.
+
+`command |& tee -a output.txt`: Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
 ## Standard streams
 Standard streams are interconnected input and output communication channels between a computer program and its environment when it begins execution. 
 The three input/output (I/O) connections are called standard input (stdin), standard output (stdout) and standard error (stderr).
@@ -165,4 +186,10 @@ About to try to access a file that doesn't exist
 cat: bad-filename.txt: No such file or directory
 ```
 
+## Redirecting output to /dev/null
+In certain situations, the output may not be useful at all. Using redirection, we can dump all the output into the void.
 
+Find does not have access to a lot of directories and files and we can suppress the errors:
+```
+find / -name ".bash_history" 2> /dev/null
+```

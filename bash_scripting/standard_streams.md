@@ -1,27 +1,41 @@
 
 # Standard streams
 
-Iesirea unui comenzi rulate in command line poate fi:
+Iesirea unui comenzi rulate in "command line poate" fi:
 * afisata pe ecran
   * ex: `ls` - afiseaza pe ecran
 * "redirected"
   * ex: `ls > fisiere.txt` - scrie in fisierul _fisiere.txt_ si nu afiseaza pe ecran
 * piped
-  * ex: `ls | grep ....` - nu afiseaza pe ecran, ci trimipte prin "pipe" catre comanda grep. Comanda grep, la randul ei, poate sa afiseze rezultatul pe ecran, sa il scrie in fisier, sau sa il trimita prin "pipe" catre alta comanda.
-    * `ls | grep "..."` - afiseaza pe ecran
-    * `ls | grep "..." > rezultate.txt" - scrie in fisier
-    * `ls | grep "..." | sed ...` - trimite prin "pipe" catre comanda `sed`. Comanda send are, la randul ei, cele 3 optiuni de afisare.
+  * ex: `ls | grep ....` - nu afiseaza pe ecran, ci trimipte prin "pipe" catre comanda _grep_. Comanda _grep_, la randul ei, poate sa afiseze rezultatul pe ecran, sa il scrie in fisier, sau sa il trimita prin "pipe" catre alta comanda.
+    * `ls | grep "..."` - comanda grep primeste prin pipe de la comanda ls si afiseaza pe ecran
+    * `ls | grep "..." > rezultate.txt" - comanda grep primeste prin pipe de la comanda ls si  scrie in fisier
+    * `ls | grep "..." | sed ...` - comanda grep primeste prin pipe de la comanda ls si trimite prin "pipe" catre comanda `sed`. Comanda send are, la randul ei, cele 3 optiuni de afisare.
   
 
-Fiecare fisier in Linux are un File Descriptor asociat cu el.
+Fiecare fisier in Linux are un **File Descriptor** asociat cu el.\
 Un File Descriptor este un numar.
 
-Tastatura este Standard Input Device implicit.
-Ecranul este Standard Outpu Device implicit.
-">" este operatorul de redirectare a al iesirii
-">>" adauga date la un fisier deja existent
-"<" este operatorul de redirectare al intrarii
-">&" Redirecteaza iesirea unui fisier in altul
+
+Orice program rulat in linia de comanda are 3 "file descriptor-i" (asa ii primeste de la kernerl-ul de linux cand programul este rulat".
+* File descriptoru-ul cu valoarea 0 care este Standard Input Device.
+ * Tastatura este Standard Input Device implicit.
+* File descriptoru-ul cu valoarea 1 care este Standard Output Device.
+ * Ecranul este Standard Output Device implicit.
+* File descriptoru-ul cu valoarea 2 care este Standard Error Device.
+ * Ecranul este Standard Error Device implicit.
+
+Programul scrie erorile in Standard Error (adica in file descriptor-ul cu nr. 3), informatiile in Standard Output (adica in file descriptor-ul cu nr. 2) si citeste valori de intrare din Standard Input (adica file descriptor-ul cu nr. 0).
+
+Daca kernel-ul i-a dat pentru Stdandard Erorr si Standard Output ecranul, atunci, cand programul va scrie in File Descriptor-ii 2 si 3, va scrie pe eran.\
+Daca kernel-ul i-a dat pentru Stdandard Erorr un fisier si pentru si Standard Output un File Descriptor, atunci va scrie erorile in fisier si informatia pe ecran.\
+Daca kernel-ul i-a dat pentru Stdandard Erorr si Standard Output fisisere, atunci programul nu va mai afisa nimic pe ecran cand va scrie in File Descriptorii 2 si 3, ci se va duce totul in fisiere.
+
+Operatori:
+* ">" este operatorul de redirectare a al iesirii
+* ">>" adauga date la un fisier deja existent
+* "<" este operatorul de redirectare al intrarii
+* ">&" Redirecteaza iesirea unui fisier in altul
 
 Standard streams are interconnected input and output communication channels between a computer program and its environment when it begins execution. 
 The three input/output (I/O) connections are called standard input (stdin), standard output (stdout) and standard error (stderr).

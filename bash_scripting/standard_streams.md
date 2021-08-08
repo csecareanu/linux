@@ -117,8 +117,11 @@ cat: bad-filename.txt: No such file or directory
 ## Redirect stdout and stderr to the same file (Redirecting stdout and stderr to the Same File)
 We’ve got each of the standard output streams going to its own dedicated file. The only other combination we can do is to send both _stdout_ and _stderr_ to the same file.
 
-We can use the following command to achieve:
+To write the output from one file to the input of another file: `>&`.
+
+To redirect error output (_stderr_) to standard output (_stdout_) which in turn is redirected to file _capture.txt_:
 ```
 ./error.sh > capture.txt 2>&1
 ```
+
 

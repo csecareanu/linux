@@ -22,7 +22,7 @@ However, it's still useful to think of the Tagging and Untagging as occurring:
 * Egress port is determined based on the VID in the Tag.
 * Packet is Untagged and sent.
 
-All packets start out as Untagged when they enter the network, and they also should always end as Untagged when they leave the network and arrive at their destination. Along their journey, if they cross a VLAN network, they will be Tagged with a VID, switched according to this VID by one or more VLAN switches, and then finally Untagged by the last VLAN switch.
+All packets start out as untagged when they enter the network, and they also should always end as Untagged when they leave the network and arrive at their destination. Along their journey, if they cross a VLAN network, they will be Tagged with a VID, switched according to this VID by one or more VLAN switches, and then finally Untagged by the last VLAN switch.
 
 There are three things you need to configure for each port of each switch:
 *	Member VLANs (list of VIDs).

@@ -9,7 +9,7 @@ Linux VLANs are based on 802.1Q, and almost any switch that advertises “VLAN�
 
 A switch won't send packets to ports where it knows the destination MAC can't be found. A VLAN switch adds another condition on top of this. It won't send packets to ports (the “egress port” or sink) that aren't “members” of the VLAN to which the packet belongs. This is based on the VLAN ID (VID) of the packet, which is a number between 1 and 4096.
 
-_The ingress port is the incoming port. The egress port is the exiting port._
+_The **ingress** port is the incoming port. The **egress** port is the exiting port._
 
 If a packet doesn't already have a VID, it is assigned one based on the port on which it arrived (the “ingress port” or source). This is the Primary VID (PVID) of the port. Each switch port can be a member of multiple VLANs, one of which must be configured as its PVID.
 

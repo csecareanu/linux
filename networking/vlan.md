@@ -4,7 +4,7 @@ The purpose of VLAN (Virtual LAN) is to build LANs from individual ports instead
 
 When you want to extend this concept across multiple switches, things become more complicated. The switches need a standard way to cooperate and keep track of which traffic belongs to which VLAN.  The purpose is still the same—build LANs from individual ports instead of entire switches, even if the ports are spread across multiple switches and even multiple geographic locations.
 
-The standard in use today is 802.1Q.  802.1Q provides a simple way for multiple VLAN switches to cooperate by attaching VLAN-specific data directly to the headers of individual Ethernet packets.\
+The standard in use today is **802.1Q**.  802.1Q provides a simple way for multiple VLAN switches to cooperate by attaching VLAN-specific data directly to the headers of individual Ethernet packets.\
 Linux VLANs are based on 802.1Q, and almost any switch that advertises “VLAN” will support this standard.
 
 A switch won't send packets to ports where it knows the destination MAC can't be found. A VLAN switch adds another condition on top of this. It won't send packets to ports (the “egress port” or sink) that aren't “members” of the VLAN to which the packet belongs. This is based on the VLAN ID (VID) of the packet, which is a number between 1 and 4096.

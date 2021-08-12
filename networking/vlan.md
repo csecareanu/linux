@@ -13,7 +13,7 @@ _The **ingress** port is the incoming port. The **egress** port is the exiting p
 
 If a packet doesn't already have a VID, it is assigned one based on the port on which it arrived (the “ingress port” or source). This is the Primary VID (PVID) of the port. Each switch port can be a member of multiple VLANs, one of which must be configured as its PVID.
 
-The VID is stored in an extra 4-byte header that is added to the packet called the Tag.\
+**The VID is stored in an extra 4-byte header that is added to the packet called the Tag.**\
 Only VLAN devices know what to do with Tagged packets; normal Ethernet devices don't expect to see them. Unless the packet is being sent to another VLAN switch, the Tag needs to be removed before it is sent. This Untagging is done after the switch determines the egress port.
 
 In the case of a VLAN with only a single switch, no Tagged packets should be sent or received.\

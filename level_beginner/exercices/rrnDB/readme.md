@@ -182,7 +182,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_
 ```
 
 I don't want only the listing of uniques, I want to count the number of uniques.\
-I want to count the number of times each unique sequence appears.\
+I want to count the number of times each unique sequence appears.
 ```
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq -c | head
 

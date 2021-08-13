@@ -14,7 +14,7 @@ grep ">" data/v19/rrnDB.align | wc
 77530  77530 7607109
 ```
 
-Get only the number of lines
+Display only the number of lines (instead of no of lines, words and characters as above)
 ```
 grep ">" data/v19/rrnDB.align | wc -l
 77530

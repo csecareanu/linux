@@ -4,7 +4,7 @@ __WC__ stands for _Word Count_
 
 ## Syntax
 
-### Print the lines, words and the number of characters in the file
+### Print the number of lines, words and characters in the file
 `wc <file name>` 
 
 ```

@@ -198,3 +198,30 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_
       7 >Acholeplasma
 ```
 We can see that _Acetobacter_ is represented by 28 genomes in rrndb whereas _Acetoanaerobium_ only occurs in one genome.
+
+
+Get the most frequent genera in the dataset
+```
+grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq -c | sort -n -r | head
+
+ 979 >Escherichia
+ 787 >Salmonella
+ 640 >Bordetella
+ 636 >Streptococcus
+ 604 >Bacillus
+ 597 >Staphylococcus
+ 536 >Pseudomonas
+ 482 >Klebsiella
+ 394 >Lactobacillus
+ 272 >Campylobacter
+```
+
+To get the number of different generas:
+```
+grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq -c | sort -n -r | wc -l
+
+1313
+```
+
+### Make an unique identifier for each organism (each sequence and each genome in the dataset)
+

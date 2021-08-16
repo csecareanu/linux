@@ -29,6 +29,9 @@ All packets start out as **Untagged** when they enter the network, and they also
 *	PVID (must be one of the member VLANs).
 *	Whether packets should be left Tagged or Untagged when sent (egress).
 
+## Ethernet interface setup
 Think of each Ethernet interface in your system as a one-port switch. An Ethernet interface already performs the same basic functions as a switch—forwarding packets, maintaining an ARP cache and so on—but on a single port without the need or capability to decide to which other port(s) a packet should be sent.
 
-Linux's bridging code elegantly plugs in to and extends the existing functionality by letting you define bridges as virtual Ethernet interfaces that bundle one or more regular Ethernet interfaces. Each interface within the bridge is a port. In operation, this is exactly like ports of a switch.
+**Linux's bridging code elegantly plugs in to and extends the existing functionality by letting you define bridges as virtual Ethernet interfaces that bundle one or more regular Ethernet interfaces. Each interface within the bridge is a port. In operation, this is exactly like ports of a switch.**
+
+

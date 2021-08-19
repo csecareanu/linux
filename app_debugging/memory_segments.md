@@ -77,13 +77,13 @@ The admin stuff stored on the stack :
 ![the stack retaddr savedfrpointer](./img/the_stack_retaddr_savedfrpointer.png)
  
 ### Function calls
-* When a function is called, a new stack frame is created
+When a function is called, a new stack frame is created
  * arguments are stored on the stack
  * current frame pointer and return address are recorded
  * memory for local variables is allocated
  * stack pointer is adjusted
 
-* When a function returns, the top stack frame is removed
+When a function returns, the top stack frame is removed
  * old frame pointer and return address are restored
  * stack pointer is adjusted
  * the caller can find the return value, if there is one, on top of the stack

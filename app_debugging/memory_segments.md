@@ -91,3 +91,10 @@ When a function returns, the top stack frame is removed
 Because of recursion, there may be multiple frames for the same function on the stack
 * Note that the variables that are stored in the current stack frame are precisely the variables that are in scope.
  
+### Security worries
+* There is no default initialisation for stack variables
+  * by reading unitialised local variables, you can read memory content used in earlier function calls 
+* There is only finite stack space
+* The stack mixes program data and control data
+ * by overrunning buffers on the stack we can corrupt the return
+addresses! 

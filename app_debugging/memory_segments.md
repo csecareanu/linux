@@ -3,14 +3,14 @@
 The OS allocates memory for each process for data and code.
 
 This memory consists of different segments
-* stack 
+* **stack** 
   * for local variables (incl. command line arguments) and environment variables
-* heap
+* **heap**
   * for dynamic memory
-* data segment for:
+* **data segment** for:
   * global uninitialised variables (.bss)
   * global initialised variables (.data)
-* code segment: typically read-only
+* **code segment**: typically read-only
 
 ![memory segments](./img/memory_segments.png)
 

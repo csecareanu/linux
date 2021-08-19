@@ -27,8 +27,8 @@ When a process requests access to data in its memory, it is the responsibility o
 The CPU's memory management unit (MMU) stores a cache of recently used mappings from the operating system's page table. This is called the translation lookaside buffer (TLB), which is an associative cache.\
 When a virtual address needs to be translated into a physical address, the TLB is searched first.
 
-## Memory paging
-**Memory paging is a memory management scheme by which a computer stores and retrieves data from secondary storage for use in main memory.**
+![page-table-actions](./img/page_table_actions.png)
+
 
 In this scheme, the operating system retrieves data from secondary storage in same-size blocks called _pages_.
 
@@ -70,7 +70,7 @@ USS indicates the total physical memory occupied by the process, which means tha
 The following is an example to specifically analyze the relationship between various quantities. Assuming that there are two bash processes and one cat process under Linux, the process IDs are 1044, 1045, and 1054, respectively. The following formulas are used to calculate VSS, RSS, PSS, and USS:
 
 _For a single process, in general, the memory size is sorted as follows: VSS >= RSS >= PSS >= USS_
-![vss/rss/pss/uss](./vss_rss_pss_uss.jpg)
+![vss-rss-pss-uss](./img/vss_rss_pss_uss.jpg)
     
 * VSS = 1 + 2 + 3
 * RSS = 4 + 5 + 6

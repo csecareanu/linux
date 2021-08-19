@@ -27,10 +27,22 @@ When a process requests access to data in its memory, it is the responsibility o
 The CPU's memory management unit (MMU) stores a cache of recently used mappings from the operating system's page table. This is called the translation lookaside buffer (TLB), which is an associative cache.\
 When a virtual address needs to be translated into a physical address, the TLB is searched first.
 
-![page-table-actions](./img/page_table_actions.png)
+Actions taken upon a virtual to physical address translation. Each translation is restarted if a TLB miss occurs, so that the lookup can occur correctly through hardware.
+![page-table-actions](./img/page_table_actions.png)\
 
+### Translation failures
+The page table lookup may fail, triggering a **page fault**, for two reasons:
+* The lookup may fail if there is no translation available for the virtual address, meaning that virtual address is invalid. This will typically occur because of a programming error. **It will cause a segmentation fault signal being sent to the offending program.**
+* The lookup may also fail if the page is currently not resident in physical memory. This will occur if the requested page has been moved out of physical memory to make room for another page. In this case the page is paged out to a secondary store located on a medium such as a hard disk drive (this secondary store, or "backing store", is often called a "swap partition" if it is a disk partition, or a swap file, "swapfile" or "page file" if it is a file). When this happens the page needs to be taken from disk and put back into physical memory.\
+A similar mechanism is used for memory-mapped files, which are mapped to virtual memory and loaded to physical memory on demand.
 
-In this scheme, the operating system retrieves data from secondary storage in same-size blocks called _pages_.
+Some MMUs trigger a **page fault** for other reasons:
+* Attempting to write when the page table has the read-only bit set causes a page fault.  This is a normal part of many operating system's implementation of copy-on-write; it may also occur when a write is done to a location from which the process is allowed to read but to which it is not allowed to write, in which case a signal is delivered to the process.
+* Attempting to execute code when the page table has the NX bit (no-execute bit) set in the page table causes a page fault. This provide a Write XOR Execute feature that stops some kinds of exploits.
+
+### Page table entry
+Each page table entry (PTE) holds the mapping between a virtual address of a page and the address of a physical frame. There is also auxiliary information about the page such as a present bit (indicate what pages are currently present in physical memory or are on disk), a dirty or modified bit, address space or process ID information, amongst others.\
+The dirty bit allows for a performance optimization. A page on disk that is paged in to physical memory, then read from, and subsequently paged out again does not need to be written back to disk, since the page has not changed.
 
 ## VSS
 **Virtual Set Size virtual memory consumption (including virtual memory shared with other processes)**

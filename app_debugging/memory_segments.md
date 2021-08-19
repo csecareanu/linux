@@ -82,6 +82,7 @@ The admin stuff stored on the stack :
  * current frame pointer and return address are recorded
  * memory for local variables is allocated
  * stack pointer is adjusted
+
 * When a function returns, the top stack frame is removed
  * old frame pointer and return address are restored
  * stack pointer is adjusted

@@ -1,3 +1,6 @@
+https://www.youtube.com/watch?v=gPX7d3BcZpg&t=113s
+
+
 Each sequence contains two lines.\
 The first line is the header which is denoted with a ‘>’ sign.\
 The second line is the actual sequence data.

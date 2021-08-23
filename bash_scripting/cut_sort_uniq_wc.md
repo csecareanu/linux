@@ -107,6 +107,18 @@ Output :
 39
 15
 ```
+
+**Take care that if you use sort for numerical values without -n the result will be orderd by the ASCII value of the characters:**
+```
+$ sort file1.txt
+Output :
+15
+200
+39
+50
+89
+```
+
 * -k: which field to sort on
 ```
 $ cat employee.txt

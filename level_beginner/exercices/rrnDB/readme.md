@@ -228,3 +228,42 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_
 
 ### Make an unique identifier for each organism (each sequence and each genome in the dataset)
 
+We want to create a table to have each row represented by a different sequence (a unique sequence), and each colomn be genomes that that sequence was found in 
+and the values in the table then being the number of times each sequence is found in each genome.
+
+We need a grouping file that tells us which sequence belongs to each genus or each group.\
+To get there we need to simplify the header a littel bit to identify what is the unique identifier that we can use to represent each sequence.\
+
+###  Count the frequency of sequences across genomes
+#### Create a table indicating number of times each unique sequence appears across genomes
+
+* Create a grouping file to relate each sequence to each genome.
+* Identifiy the unique sequences in the database
+* Count the number of times each unique sequence occurs across the genomes.
+
+
+seeks.sh
+
+We have 77530 sequences. So whne we create those identifiers that's the number that we are going to need to have.
+```
+$ grep -c ">" data/v19/rrnDB.align
+77530
+```
+
+If we would create an identifier based on genus name we only get out 1313 genera.\
+That is not going to be a unique identifier.
+```
+$ grep ">" data/v19/rrnDB.align | cut -f 1 -d "_" | sort | uniq | wc -l
+1313
+```
+
+Let's change this instead to be the _gcf_ and the _um_ coordonates because hopefully the genome (the assembly) as well as the coordinates of where it occurs will put us in good shape. 
+```
+$ grep ">" data/v19/rrnDB.align | cut -f 2,5 -d "|" | sort |  uniq | wc -l
+77526
+```
+It appears that this is also not a perfect identifier (77526 < 77530).
+
+Let's check for duplicates (we could have duplicates with the assembly as well as the coordonates):
+
+

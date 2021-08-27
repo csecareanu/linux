@@ -67,3 +67,16 @@ int main(){
 
 If you change in line `(4)` `condVar.wait(lck, []{ return dataReady; });` with ` condVar.wait(lck);` the program has now a race condition which leads to a deadlock.
 * The sender sends in line `(3)`  `condVar.notify_one()` its notification before the receiver is capable to receive it; therefore, the receiver will sleep forever. 
+
+If you change `dataReady = true;` without taking the mutex (and making `dataReady` a `std::atomic<bool>`) you risk againg a deadlock:
+* The wait expression is equivalent to the following four lines:
+ ```c++
+std::unique_lock<std::mutex> lck(mutex_);
+while ( ![]{ return dataReady.load(); }() {
+    // time window (1)
+    condVar.wait(lck);
+}
+```
+
+* Let me assume the notification is sent while the condition variable `condVar` is in the wait expression but not in the waiting state. This means the execution of the thread is in the source snippet in the line with the comment time window ( line 1). The result is that the notification is lost. Afterwards, the thread goes back in the waiting state and presumably sleeps forever. 
+

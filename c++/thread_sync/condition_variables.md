@@ -1,11 +1,13 @@
 
-## Lost Wakeup and Spurious Wakeup
-### Lost wakeup
+**Lost Wakeup and Spurious Wakeup**
+
+**Lost wakeup**\
 The phenomenon of the lost wakeup is that the sender sends its notification before the receiver gets to its wait state. The consequence is that the notification is lost. The C++ standard describes condition variables as a simultaneous synchronisation mechanism: "The condition_variable class is a synchronisation primitive that can be used to block a thread, or multiple threads at the same time, ...".
-### Spurious wakeup
+
+**Spurious wakeup**\
 It may happen that the receiver wakes up, although no notification happened. At a minimum POSIX Threads and the Windows API can be victims of these phenomena.
 
-## The wait workflow 
+**The wait workflow**\
 In the initial processing of `wait`, the thread locks the mutex and then checks the predicate `[]{ return dataReady; }`.
 
 If the call of the predicated evaluates to
@@ -19,7 +21,7 @@ If the condition_variable `condVar` is in the waiting state and gets a notificat
   * `true`: the thread continues its work.
   * `false: condVar.wait()` unlocks the mutex and puts the thread in a waiting (blocking) state.
 
-## Waiting for a Condition Variable
+**Waiting for a Condition Variable**
 ```c++
 // conditionVariables.cpp
 
@@ -62,3 +64,6 @@ int main(){
   
 }
 ```
+
+If you change in line `(4)` `condVar.wait(lck, []{ return dataReady; });` with ` condVar.wait(lck);` the program has now a race condition which leads to a deadlock.
+* The sender sends in line `(3)`  `condVar.notify_one()` its notification before the receiver is capable to receive it; therefore, the receiver will sleep forever. 

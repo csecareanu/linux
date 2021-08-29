@@ -232,7 +232,7 @@ We want to create a table to have each row represented by a different sequence (
 and the values in the table then being the number of times each sequence is found in each genome.
 
 We need a grouping file that tells us which sequence belongs to each genus or each group.\
-To get there we need to simplify the header a littel bit to identify what is the unique identifier that we can use to represent each sequence.\
+To get there we need to simplify the header a littel bit to identify what is the unique identifier that we can use to represent each sequence.
 
 ###  Count the frequency of sequences across genomes
 #### Create a table indicating number of times each unique sequence appears across genomes

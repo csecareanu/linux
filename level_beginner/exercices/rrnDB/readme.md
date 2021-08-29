@@ -287,8 +287,8 @@ $ grep "GCF_001576595.1" data/v19/rrnDB.align
 ```
 The first one (_GCF_001576595.1_) is coming from _Rhodobacter_sphaeroides_ and there is two chromosomes. _Rhodobacter_sphaeroides_ has two chromosomes in its genome and the way this group that sequenced the genomes numbered the bases is that for both chromosomes. They started with a 16s gene.
 
-Check if it is tru with some of these others:
-```
+Check if it is true with some of these others:
+```sh
 $ grep "GCF_003324715.1" data/v19/rrnDB.align
 
 >Rhodobacter_sphaeroides_2.4.1|GCF_003324715.1|NZ_CP030271.1|Chromosome__1|1..1471_+
@@ -314,5 +314,22 @@ We will do that in our _count_unique_seqs.sh_ file.
 ```sh
 #!/usr/bin/env bash
 
-TARGET=data/v19/
+TARGET=data/v19/rrnDB.count_table # we can also use this name: data/v19/rrnDB.unique.align
+
+ALIGN=data/v19/rrnDB.align
+TEMP_ALIGN=data/v19/rrnDB.temp.align
+
+sed -E "s/>.*\|(.*)\|(.*)\|.*\|(.*)/>\1|\2|\3/" $ALIGN | head
 ```
+
+Run in command line:
+```
+ALIGN=data/v19/rrnDB.align
+sed -E "s/>.*\|(.*)\|(.*)\|.*\|(.*)/>\1|\2|\3/" $ALIGN | head | more
+```
+
+
+(memory slot 1, 2, 3)
+Set pattern only matches the header. 
+Because it won't match the sequence line, the sequence won't be changed.
+Only the header will be changed with 'sed'

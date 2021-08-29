@@ -76,7 +76,7 @@ Output:
 I love music of Kartik.
 I love music.
 ```
-* -d: It only prints the repeated lines and not the lines which aren’t repeated.\
+* -d: It only prints the repeated lines (prints just one line for more reapeating lines) and not the lines which aren’t repeated.\
 It is usefull to check if there are duplicate lines in a file.
 
 * -i: By default, comparisons done are case sensitive but with this option case insensitive comparisons can be made.

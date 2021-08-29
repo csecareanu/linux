@@ -12,18 +12,18 @@ Each sequence is represented by two lines:
 
 Can use ‘wc’? (no because there are multiple lines for one sequence)\
 We can use grep to get the number of sequences (77530 lines, 77530 words, 7607109 characters):
-```
+```sh
 grep ">" data/v19/rrnDB.align | wc
 77530  77530 7607109
 ```
 
 Display only the number of lines (instead of no of lines, words and characters as above)
-```
+```sh
 grep ">" data/v19/rrnDB.align | wc -l
 77530
 ```
 or
-```
+```sh
 grep -c ">" data/v19/rrnDB.align
 77530
 ```
@@ -54,7 +54,7 @@ So we need first to get the unique genome assemblies.
 We need the `GCF` field.
 
 We will use `head` because there are 76000 sequences and there will be printed to much data to the screen (`head` will print only the first 10 entries, which is enough for us to see how the data looks like)
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1 -d "_" | head
 
 >Escherichia
@@ -71,7 +71,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1 -d "_" | head
 ```
 
 To get the assembly numbers:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 2 -d "|" | head
 
 GCF_000599665.1
@@ -87,7 +87,7 @@ GCF_000253155.1
 ```
 
 I don't have my taxonomic information. To get both the taxonomic name as well as the assembly name:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | head
 
 >Escherichia_coli|GCF_000599665.1
@@ -103,7 +103,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | head
 ```
 
 This is a unique combination which I can then:
-``` 
+``` sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | uniq | head
 
 >Escherichia_coli|GCF_000599665.1
@@ -120,7 +120,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | uniq | head
 
 The problem with this is that unique only compares succesive rows of data. So what we need to do instead is we first need to sort the data and then unique it.\
 So we can see now there are multiple genomes that we have sorted it:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | head
 
 >'Catharanthus_roseus'_aster_yellows_phytoplasma|GCF_004214875.1
@@ -136,7 +136,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | head
 ```
 
 So we have uniqued the genomes:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | head
 
 >'Catharanthus_roseus'_aster_yellows_phytoplasma|GCF_004214875.1
@@ -153,7 +153,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | head
 
 Now we need to know for the unique genomes how many genera do we have.\
 We will get only the genus names represented:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | head
 
 >'Catharanthus
@@ -169,7 +169,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_
 ```
 
 We will sort them again and make them unique:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq | head
 
 >'Catharanthus
@@ -186,7 +186,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_
 
 I don't want only the listing of uniques, I want to count the number of uniques.\
 I want to count the number of times each unique sequence appears.
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq -c | head
 
       1 >'Catharanthus
@@ -204,7 +204,7 @@ We can see that _Acetobacter_ is represented by 28 genomes in rrndb whereas _Ace
 
 
 Get the most frequent genera in the dataset
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq -c | sort -n -r | head
 
  979 >Escherichia
@@ -220,7 +220,7 @@ grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_
 ```
 
 To get the number of different generas:
-```
+```sh
 grep ">" data/v19/rrnDB.align | cut -f 1,2 -d "|" | sort | uniq | cut -f 1 -d "_" | sort | uniq -c | sort -n -r | wc -l
 
 1313
@@ -242,28 +242,77 @@ To get there we need to simplify the header a littel bit to identify what is the
 * Count the number of times each unique sequence occurs across the genomes.
 
 
-seeks.sh
+**This is how a squence looks like in database:**
+```sh
+>Escherichia_coli|GCF_000599665.1|NZ_CP007392.1|Chromosome__ANONYMOUS|143933..145488_+
+```
 
 We have 77530 sequences. So whne we create those identifiers that's the number that we are going to need to have.
-```
+```sh
 $ grep -c ">" data/v19/rrnDB.align
 77530
 ```
 
 If we would create an identifier based on genus name we only get out 1313 genera.\
 That is not going to be a unique identifier.
-```
+```sh
 $ grep ">" data/v19/rrnDB.align | cut -f 1 -d "_" | sort | uniq | wc -l
 1313
 ```
 
 Let's change this instead to be the _gcf_ and the _um_ coordonates because hopefully the genome (the assembly) as well as the coordinates of where it occurs will put us in good shape. 
-```
+```sh
 $ grep ">" data/v19/rrnDB.align | cut -f 2,5 -d "|" | sort |  uniq | wc -l
 77526
 ```
 It appears that this is also not a perfect identifier (77526 < 77530).
 
 Let's check for duplicates (we could have duplicates with the assembly as well as the coordonates):
+```sh
+$ grep ">" data/v19/rrnDB.align | cut -f 2,5 -d "|" | sort |  uniq -d
+
+GCF_001576595.1|1..1471_+
+GCF_001685625.1|1..1471_+
+GCF_002706325.1|1..1471_+
+GCF_003324715.1|1..1471_+
+```
+There is four assemblies that have two 16s copies that start at position one and go to 1470.\
+Let's check what those are are and who those are coming from:
+```
+$ grep "GCF_001576595.1" data/v19/rrnDB.align
+
+>Rhodobacter_sphaeroides|GCF_001576595.1|NZ_CP012960.1|Chromosome__1|1..1471_+
+>Rhodobacter_sphaeroides|GCF_001576595.1|NZ_CP012961.1|Chromosome__2|1..1471_+
+>Rhodobacter_sphaeroides|GCF_001576595.1|NZ_CP012961.1|Chromosome__2|33674..35144_+
+```
+The first one (_GCF_001576595.1_) is coming from _Rhodobacter_sphaeroides_ and there is two chromosomes. _Rhodobacter_sphaeroides_ has two chromosomes in its genome and the way this group that sequenced the genomes numbered the bases is that for both chromosomes. They started with a 16s gene.
+
+Check if it is tru with some of these others:
+```
+$ grep "GCF_003324715.1" data/v19/rrnDB.align
+
+>Rhodobacter_sphaeroides_2.4.1|GCF_003324715.1|NZ_CP030271.1|Chromosome__1|1..1471_+
+>Rhodobacter_sphaeroides_2.4.1|GCF_003324715.1|NZ_CP030272.1|Chromosome__2|1..1471_+
+>Rhodobacter_sphaeroides_2.4.1|GCF_003324715.1|NZ_CP030272.1|Chromosome__2|33674..35144_+
+```
+
+It appears that the assembly and the coordinates (_gcf_ and the _um_) are not sufficient that will also have to include the _refseq id_.\
+So we will need three fields.
+
+```sh
+$ grep ">" data/v19/rrnDB.align | cut -f 2,3,5 -d "|" | sort |  uniq | wc -l
+
+77530
+```
+We got 77530 unique identifiers as well as 77530 sequences. So we have got one-to-one correspondence of our identifiers.
 
 
+Now we will use `sed` to extract fields 2,3,5 to create a new file in that the first comlumn will be fileds 2,3,5 (the sequence identifier) and then the second column will be filed 2, the genome assembly that 3 and 5 the different copies correspond to.\
+Then we will modify the alignments in file so they have the updated names and so then with that grouping file linking our unique sequence identifier to the genome they came from we can than count the number of times the unique sequences show up in those fields.\
+We will do that in our _count_unique_seqs.sh_ file.
+
+```sh
+#!/usr/bin/env bash
+
+TARGET=data/v19/
+```

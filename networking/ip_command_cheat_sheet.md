@@ -1,6 +1,6 @@
 # Content
 
-[IP QUERIES](#IPQUERIES)
+[IP QUERIES](#ipqueries)
 
 IP QUERIES\
 MULTICAST ADDRESSING\
@@ -9,6 +9,15 @@ ADJUSTING AND VIEWING ROUTES
 MANAGING THE ARP TABLE
 USEFUL NETWORKING COMMANDS (NOT NECESSARILY PROVIDED FROM IPROUTE)
 COMPARING NET-TOOLS VS. IPROUTE PACKAGE COMMANDS
+
+
+
+multicast addressing\
+modifying address and link properties\
+adjusting and viewing routes\
+managing the arp table\
+useful networking commands (not necessarily provided from iproute)\
+comparing net-tools vs. iproute package commands\
 
 
 

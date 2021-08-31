@@ -1,6 +1,8 @@
 # Content
-* [/proc/[pid]/cmdline         ](#procpidcmdline)\
-[IP QUERIES](#IPQUERIES)\
+
+[tra la la](#lala)
+
+IP QUERIES\
 MULTICAST ADDRESSING\
 MODIFYING ADDRESS AND LINK PROPERTIES\
 ADJUSTING AND VIEWING ROUTES

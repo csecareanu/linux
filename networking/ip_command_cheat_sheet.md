@@ -2,7 +2,7 @@
 
 ## Content
 
-[IP QUERIES](#ip_queries)
+[IP QUERIES](#ip-queries)
 
 IP QUERIES\
 MULTICAST ADDRESSING\

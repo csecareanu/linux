@@ -1,6 +1,6 @@
 # Content
 
-[IP QUERIES](#ipqueries)
+[IP QUERIES](#ip queries)
 
 IP QUERIES\
 MULTICAST ADDRESSING\

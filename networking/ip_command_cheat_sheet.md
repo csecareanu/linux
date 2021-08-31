@@ -11,25 +11,17 @@
 
 
 
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d\
-d
-
-
 ## IP QUERIES <a name="IP_QUERIES"/>
+### addr
+Display IP Addresses and property information (abbreviation of address)
+* `ip addr` Show information for all addresses
+* `ip addr show dev em1` Display information only for device em1
+
+### link
+Manage and display the state of all network interfaces
+* `ip link` Show information for all interfaces
+* `ip link show dev em1` Display information only for device em1
+* `ip -s link` Display interface statistics
 
 [top](#content)
 ## MULTICAST ADDRESSING <a name="MULTICAST_ADDRESSING"/>

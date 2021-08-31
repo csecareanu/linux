@@ -1,6 +1,6 @@
 # Content
 
-[tra la la](#lala)
+[IP QUERIES](#IPQUERIES)
 
 IP QUERIES\
 MULTICAST ADDRESSING\

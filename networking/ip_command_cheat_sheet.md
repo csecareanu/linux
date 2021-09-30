@@ -1,6 +1,7 @@
 # ip COMMAND CHEAT SHEET
 
 ## Content <a name="content"/>
+[NET-TOOLS COMMANDS](#NET_TOOLS_COMMANDS)\
 [IP QUERIES](#IP_QUERIES)\
 [MULTICAST ADDRESSING](#MULTICAST_ADDRESSING)\
 [MODIFYING ADDRESS AND LINK PROPERTIES](#MODIF_ADDR_AND_LINK_PROP)\
@@ -10,6 +11,23 @@
 [COMPARING NET-TOOLS VS. IPROUTE PACKAGE COMMANDS](#COMPARING_NET-TOOLS_VS_IPROUTE)
 
 
+## NET-TOOLS COMMANDS <a name="NET_TOOLS_COMMANDS">
+### arp
+The `arp` command allows users to manipulate the neighbor cache or ARP table.
+* `arp` Lists the current contents of the ARP cache.
+  You should notice the following columns: 
+  * Address: on most systems, you see IPv4 address listed (192.168.0.1 or the like)
+  * HWtype: is specified as `ether` (Ethernet)
+  * HWaddress:  is the translated MAC address
+  * Flags: indicates if the address has been learned, manually set by the user, published, or is incomplete
+  * Mask:
+  * Iface: is simply the name of the interface that is listed
+* `arp -i bondX` Display all arp entries entries for a specific interface.
+* `arp -a 192.168.0.1` To see all arp entries for a particular address
+* `arp -s 192.168.0.1 -i ethX 51:53:00:17:34:09` To add an entry (permanently) to the cache, use the -s option. You need to specify the IP and MAC addresses, as well as the interface.
+* `arp -d 192.168.0.1` To remove an entry from the arp cache, use the -d flag, followed by the IP address you wish to remove
+
+## IP QUERIES <a name="IP_QUERIES"/>
 
 ## IP QUERIES <a name="IP_QUERIES"/>
 ### addr

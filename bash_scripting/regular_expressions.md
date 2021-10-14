@@ -90,3 +90,22 @@ The '\\' charater is a special character also. So if you want to search specific
 - Match everything that is not 'b' followed by 'at': will match 'cat', 'mat' but will not match 'pat'
 - Match strings of the form: "Mr. Schafer", "Mr Smith", "Mr. T": `Mr\.?\s[A-Z]\w*`
 - Match strings of the form (using groups): "Mr. Schafer", "Mr Smith", "Mr. T", "Ms Davis", "Mrs. Robinson" : `M(r|s|rs)\.?\s[A-Z]\w*`
+
+
+## Advanced topic: lazy' and 'greedy' mean in the context of regular expressions
+* 'Greedy' means match longest possible string
+* 'Lazy' means match shortest possible string
+
+|Greedy quantifier | Lazy quantifier |	Description |
+|--|--|--|
+| * |	\*?	| Star Quantifier: 0 or more |
+| + |	+? | Plus Quantifier: 1 or more |
+| ?	|?? |	Optional Quantifier: 0 or 1 |
+| {n} |	{n}? |	Quantifier: exactly n |
+| {n,} |	{n,}? |	Quantifier: n or more |
+| {n,m} |	{n,m}? |	Quantifier: between n and m |
+
+Example:\
+test string : _stackoverflow_\
+greedy reg expression : `s.*o` output: **stackoverflo**w\
+lazy reg expression : `s.*?o` output: **stacko**verflow

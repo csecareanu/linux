@@ -92,7 +92,7 @@ The '\\' charater is a special character also. So if you want to search specific
 - Match strings of the form (using groups): "Mr. Schafer", "Mr Smith", "Mr. T", "Ms Davis", "Mrs. Robinson" : `M(r|s|rs)\.?\s[A-Z]\w*`
 
 
-## Advanced topic: lazy' and 'greedy' mean in the context of regular expressions
+## Lazy and Greedy mean in the context of regular expressions
 * 'Greedy' means match longest possible string
 * 'Lazy' means match shortest possible string
 

@@ -96,6 +96,8 @@ The '\\' charater is a special character also. So if you want to search specific
 * 'Greedy' means match longest possible string
 * 'Lazy' means match shortest possible string
 
+Adding a (`?`, `*` or `+`) on a quantifier makes it non-greedy.
+
 |Greedy quantifier | Lazy quantifier |	Description |
 |--|--|--|
 | * |	\*?	| Star Quantifier: 0 or more |

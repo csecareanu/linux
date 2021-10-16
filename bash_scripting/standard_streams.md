@@ -112,14 +112,14 @@ $ ./error.sh > capture.txt
 cat: bad-filename.txt: No such file or directory
 ```
 The error message that is delivered via _stderr_ is still sent to the terminal window. 
-We can check the contents of the file to see whether the _stdout_ output went to the file.
+We can check the content of the file to see whether the _stdout_ output went to the file.
 ```
 cat capture.txt
 ```
-The output from _stdin_ was redirected to the file as expected:
+The output from _stdout_ was redirected to the file as expected:
 ```
 $ cat capture.txt
-cat: bad-filename.txt: No such file or directory
+About to try to access a file that doesn't exist
 ```
 
 The **>** redirection symbol works with _stdout_ by default. You can use one of the numeric file descriptors to indicate which standard output stream you wish to redirect.

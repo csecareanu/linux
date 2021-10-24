@@ -3,7 +3,7 @@
 
 ## Syntax
 
-### Count and print the number of lines
+### Count and print the number of lines which matches
 `grep -c <file name>`
 ```
 grep -c  ">" rrnDB-5.6_16S_rRNA.fasta

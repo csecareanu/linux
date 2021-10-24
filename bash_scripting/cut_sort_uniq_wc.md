@@ -84,6 +84,7 @@ It is usefull to check if there are duplicate lines in a file.
 # SORT
 
 ## Parameters
+* -f, --ignore-case
 * -r sorting in reverse order
 * -n: numerical sort
 ```

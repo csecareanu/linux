@@ -3,6 +3,19 @@
 
 ## Syntax
 
+### Show lines which does not match
+`grep -v "expresie de cautatat" *`
+
+### Filter
+--include
+
+### Case insesitive
+-i
+
+
+### Show the file names which contain the searched expression
+`grep -l 'expresie de cautat
+
 ### Count and print the number of lines which matches
 `grep -c <file name>`
 ```

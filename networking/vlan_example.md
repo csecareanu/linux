@@ -1,4 +1,9 @@
 
+**Monitorize kernel logs for all operations**
+```bash
+dmesg -w
+```
+
 **Delete interface if exists**
 ```bash
 ip -br addr
@@ -19,14 +24,16 @@ lsmod | grep 8021q
 # add the module
 sudo modprobe 8021q
 
-# Making it permanent (load it at boot time)
+# If you want to make it permanent (load it at boot time)
 sudo su -c 'echo "8021q" >> /etc/modules'
 ```
 
 **Create virtual interface**
 ```bash
-# check if the interface already exists
-ip -br addr 
+# check if the interface already exists using one of the two options
+ip -br addr
+ip -br link
+
 
 sudo vconfig add ens34 10
 # or
@@ -43,7 +50,7 @@ sudo ip addr add 10.0.0.1/24 dev ens34.10
 sudo ip link set up ens34.10
 ```
 
-**To make it permanent load 8021q at boot time and add the following lines to /etc/network/interfaces**
+**To make it permanent load 8021q at boot time and add the following lines to /etc/network/interfaces (Ubuntu/Debian/Linux Mint)**\
 ```
 auto ens34.10
 iface ens34.10 inet static
@@ -51,3 +58,4 @@ iface ens34.10 inet static
     netmask 255.255.255.0
     vlan-raw-device ens34
 ```
+> For RHEL/CentOS/Fedora the settings are different and are stored in /etc/sysconfig/network-scripts/ifcfg-eth0

@@ -4,9 +4,16 @@
 dmesg -w
 ```
 
+**Watch for netlink messages**
+```bash
+ip monitor all
+```
+
 **Delete interface if exists**
 ```bash
-ip -br addr
+ip -br addr show ens34.10
+# or
+ip -br link show ens34.10
 # or
 ifconfig ens34.10
 
@@ -28,7 +35,7 @@ sudo modprobe 8021q
 sudo su -c 'echo "8021q" >> /etc/modules'
 ```
 
-**Create virtual interface**
+**Create a virtual interface**
 ```bash
 # check if the interface already exists using one of the two options
 ip -br addr
@@ -42,7 +49,8 @@ sudo ip link add link ens34 name ens34.10 type vlan id 10
 
 **Assign an address to the new interface**
 ```bash
-sudo ip addr add 10.0.0.1/24 dev ens34.10
+ip addr flush dev ens34.10
+sudo ip addr add 10.0.0.1/24 brd 10.0.0.255 dev ens34.10
 ```
 
 **Start the new interface**

@@ -1,4 +1,6 @@
 
+Sample file: https://gist.github.com/trusktr/1e5e516df4e8032cbc3d
+
 Got to: `~/Library/KeyBindings`.\
 If the folder `KeyBindings` doesn't exist, create one.
 

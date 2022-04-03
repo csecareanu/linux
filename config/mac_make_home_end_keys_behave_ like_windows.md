@@ -5,6 +5,8 @@ If the folder `KeyBindings` doesn't exist, create one.
 Add a file `DefaultKeyBinding.dict` with the following content:
 ```
 {
+  "^v" = "paste:"; // ctr-v
+  "^c" = "copy:"; // ctr-c
   "\UF729"  = moveToBeginningOfParagraph:; // home
   "\UF72B"  = moveToEndOfParagraph:; // end
   "$\UF729" = moveToBeginningOfParagraphAndModifySelection:; // shift-home

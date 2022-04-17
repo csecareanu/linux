@@ -1,6 +1,10 @@
 
 ## Setup
 * check current time zone
+* Settings -> Privacy -> Screen Lock -> disable
+* Settings -> Power
+* Settings -> Appearance (icon size, color theme)
+* Settings -> Users -> Automatic Login
 
 ## Tools to install
 * sudo apt-get install net-tools

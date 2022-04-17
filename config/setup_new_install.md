@@ -5,7 +5,7 @@
 * Settings -> Power
 * Settings -> Appearance (icon size, color theme)
 * Settings -> Users -> Automatic Login
-* Disable firewall
+* Disable/Configure firewall
 
 ## Tools to install
 * sudo apt-get install net-tools

@@ -1,3 +1,8 @@
+
+## Setup
+* check current time zone
+
+## Tools to install
 * sudo apt-get install net-tools
 * sudo apt install vim
 * sudo apt install tmux

@@ -16,6 +16,7 @@
 * sudo apt install htop
 * sudo apt install iperf3
 * sudo apt install sysstat
+* sudo apt install iputils-arping
 * atom
   * sudo apt update
   * sudo apt install software-properties-common apt-transport-https wget

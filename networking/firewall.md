@@ -62,4 +62,4 @@ Verify UFW Status:
 sudo ufw status
 ```
 
-Configure the firewall: https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands
+Configure the firewall (UFW Essentials: Common Firewall Rules and Commands): https://www.digitalocean.com/community/tutorials/ufw-essentials-common-firewall-rules-and-commands

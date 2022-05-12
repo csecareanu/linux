@@ -1,13 +1,11 @@
 ## The packet flow of a wireless client associating to an access point
 <img src="./img/wifi_monitoring/wireless_packet_flow.png" width="300px"/>
 
-![img/wifi_monitoring/wireless_packet_flow.png](./img/wifi_monitoring/wireless_packet_flow.png)
-
 * EAPOL data packets are used for the 4 way handshake
 * QoS Data packets contains encrypted data
 
 ## The Probe request, Authentication, Association asnd Handshake packets:
-![img/wifi_monitoring/wireless_auth_packets.png](img/wifi_monitoring/wireless_auth_packets.png)
+<img src="./img/wifi_monitoring/wireless_auth_packets.png" height="250px"/>
 
 ## Wireshark filters
 * To fliter the packets form the client: wlan.addr == <mac addr>

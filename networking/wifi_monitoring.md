@@ -74,6 +74,13 @@ phy0    wlan0           ath9k_htc       Qualcomm Atheros Communications AR9271 8
 Confirm the card is in monitor mode:
 ```
 $ iwconfig
+lo        no wireless extensions.
+
+eth0      no wireless extensions.
+
+wlan0mon  IEEE 802.11  Mode:Monitor  Frequency:2.457 GHz  Tx-Power=20 dBm   
+          Retry short limit:7   RTS thr:off   Fragment thr:off
+          Power Management:off
 ```
 
 To capture packets without wireshark

@@ -1,5 +1,7 @@
 ## The packet flow of a wireless client associating to an access point
-![img/wifi_monitoring/wireless_packet_flow.png](img/wifi_monitoring/wireless_packet_flow.png){:height="200px" witdh="100px"}.
+<img src="./img/wifi_monitoring/wireless_packet_flow.png" width="300px"/>
+
+![img/wifi_monitoring/wireless_packet_flow.png](./img/wifi_monitoring/wireless_packet_flow.png)
 
 * EAPOL data packets are used for the 4 way handshake
 * QoS Data packets contains encrypted data

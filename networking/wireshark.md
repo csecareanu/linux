@@ -6,4 +6,7 @@
 
 ### TCP Window Size <a name="add_comulum_tcp_window_size">
 * Go to: Edit -> Preferences -> Columns
-* Add a new column: Title: Windows Size, Type: Custom, Fields: tcp.window_size_value
+* Add a new column 
+  * Title: Windows Size
+  * Typee: Custom 
+  * Fields: tcp.window_size_value  (or you can use the field tcp.window_size if you want to work with the calculated scaling window value)

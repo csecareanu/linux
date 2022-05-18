@@ -2,6 +2,7 @@
 * [The three-way handshake](#three-way_handshake)
 * [TCP keepalive](#keepalive)
   *  [Checking for dead peers](#checking_for_dead_peers)
+  *  [Preventing disconnection due to network inactivity](#prev_disconn_due_to_innactivity)
 
 ## The three-way handshake <a name="three-way_handshake">
 The initial three-way handshake, with one SYN segment from A to B, the SYN/ACK back from B to A, and the final ACK from A to B. At this time, we're in a stable status: connection is established.
@@ -53,4 +54,22 @@ If the connection is broken and if A tries to send data to B over the dead conne
       |                                                         |
  ``` 
   
-### Preventing disconnection due to network inactivity
+### Preventing disconnection due to network inactivity <a name="prev_disconn_due_to_innactivity">
+The other useful goal of keepalive is to prevent inactivity from disconnecting the channel. It's a very common issue, when you are behind a NAT proxy or a firewall, to be disconnected without a reason (proxies and firewalls keep track of all connections that pass through them; because of the physical limits of these machines, they can only keep a finite number of connections in their memory)
+
+```
+    _____           _____                                     _____
+   |     |         |     |                                   |     |
+   |  A  |         | NAT |                                   |  B  |
+   |_____|         |_____|                                   |_____|
+      ^               ^                                         ^
+      |--->--->--->---|----------- SYN ------------->--->--->---|
+      |---<---<---<---|--------- SYN/ACK -----------<---<---<---|
+      |--->--->--->---|----------- ACK ------------->--->--->---|
+      |               |                                         |
+      |               | <--- connection deleted from table      |
+      |               |                                         |
+      |--->- PSH ->---| <--- invalid connection                 |
+      |               |                                         |
+
+```

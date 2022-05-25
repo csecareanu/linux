@@ -33,8 +33,8 @@ Then we’ll unmount the partition and close the encrypted channel
 2. `cryptsetup luksClose /dev/mapper/my_usb`
 
 Finally, type `reboot now`
-You are now ready to reboot into Kali Live with Encrypted Persistence!
-So select that option at the load screen.
+You are now ready to reboot into Kali Live with Encrypted Persistence!\
+So select that option at the load screen.\
 During boot up, you will be prompted to unlock your partition.
 
 ## Driver install on Kali Linux <a name="driver_install"/>

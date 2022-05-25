@@ -1,3 +1,19 @@
+## Driver install on Kali Linux
+```
+# check dirver Vendor (lsusb if the netowrk card is on usb or lspci if it is an internal one)
+lsusb
+lspci
+
+apt-get update
+apt-get install synaptic -y
+```
+
+Open Synaptic Package Manager application
+* Press search button
+* In the search field type driver vendor name (broadcom)
+* Right click on broadcom-sta-dkms and choose Mark for Instalation
+* Press Mark button
+
 ## The packet flow of a wireless client associating to an access point
 <img src="./img/wifi_monitoring/wireless_packet_flow.png" width="300px"/>
 

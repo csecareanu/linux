@@ -21,6 +21,7 @@ Open Synaptic Package Manager application
 * Make sure that linux-headers-4.15.0-kali2-amd64 has the same version with linux-image-4.15.0-kali2-amd64 (4.15)\
 Remove the wrong package (linux-image-4.14.0-kali3-amd64) and install the right one
 
+Restart the computer and then check with `iwconfig` if the driver is loaded.
 
 ## The packet flow of a wireless client associating to an access point
 <img src="./img/wifi_monitoring/wireless_packet_flow.png" width="300px"/>

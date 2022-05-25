@@ -37,14 +37,20 @@ Channel frequency: 2437 [BG 6]
       > Tag: SSID parameter set: DIRECT-DIRECT-DIRECT-DIRECT-DIRE
          > SSID: DIRECT-DIRECT-DIRECT-DIRECT-DIRE
 ```
-
   
 ## How to decrypt IEE 802.11 traffic <a name="decript_traffic"/>
+
+The decryption is necessary for:
+* the data filed from QoS packets which is encrypted
+* also the ICMP packets are encrypted
   
-Wireshark -> Preferences -> Protocols -> IEE 802.11\
-Edit Decryption keys and add:
-* Key type: wpa-pwd
-* Key: <preshared key>:<ssid>
+Wireshark -> Preferences -> Protocols -> IEE 802.11
+* Edit Decryption keys and add:
+   * Key type: wpa-pwd
+   * Key: _preshared key_:_ssid_
+* Check radion button
+   *  Ignore the Protection bit: Yes - with IV
+
 
 
 ## Caputre WiFi packests using Kali linux <a name="capture_using_kali_linux"/>

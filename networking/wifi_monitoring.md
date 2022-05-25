@@ -106,4 +106,4 @@ $ sudo airmon-ng stop wlan0mon
 3. Ignore the splash screen and pull down the “Window” menu, choose “Sniffer” from the list of options in the Wireless Diagnostics menu.
 4. Select the Wi-Fi Channel and channel Width to sniff and capture packets for and click “Start”.
 5. When satisfied with the length of the packet capture, or when sufficient network traffic has been sniffed, click on “Stop” to end the packet trace and to save the captured packet file to the Desktop.
-6. The captured packet file will appear on the desktop with a .wcap extension and include the time of the packet capture, the name should look something like “2021.05.20_14-30-12-PDT.wcap”. Now this file can be opened in Wireshark or other capture analysis tools.
+6. In the Finder, navigate to /var/tmp/ and look for the resulting .pcap file.

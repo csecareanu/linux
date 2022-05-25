@@ -1,17 +1,25 @@
-## The packet flow of a wireless client associating to an access point
+## Content
+* [The packet flow of a wireless client associating to an access point](#packet_flow)
+* [The Probe request, Authentication, Association and Handshake packets](#connect_packets)
+* [Wireshark filters](#wireshark_filters)
+* [How to decrypt IEE 802.11 traffic](#decript_traffic)
+* [Caputre WiFi packests using Kali linux](#capture_using_kali_linux)
+* [Caputre WiFi packests using MAC OS](#capture_using_macos)
+
+## The packet flow of a wireless client associating to an access point <a name="packet_flow"/>
 <img src="./img/wifi_monitoring/wireless_packet_flow.png" width="300px"/>
 
 * EAPOL data packets are used for the 4 way handshake
 * QoS Data packets contains encrypted data
 
-## The Probe request, Authentication, Association asnd Handshake packets:
+## The Probe request, Authentication, Association and Handshake packets <a name="connect_packets"/>
 <img src="./img/wifi_monitoring/wireless_auth_packets.png" height="250px"/>
 
-## Wireshark filters
+## Wireshark filters <a name="wireshark_filters"/>
 * To fliter the packets form the client: wlan.addr == <mac addr>
 * Filer for protocols: bootp icmp
 
-## How to decrypt IEE 802.11 traffic
+## How to decrypt IEE 802.11 traffic <a name="decript_traffic"/>
   
 Wireshark -> Preferences -> Protocols -> IEE 802.11\
 Edit Decryption keys and add:
@@ -19,8 +27,7 @@ Edit Decryption keys and add:
 * Key: <preshared key>:<ssid>
 
 
-
-## Caputre WiFi packests using Kali linux:
+## Caputre WiFi packests using Kali linux <a name="capture_using_kali_linux"/>
  
 Check the WiFi device driver
 ```
@@ -92,3 +99,5 @@ To stop the monitor mode:
 ```
 $ sudo airmon-ng stop wlan0mon
 ```
+  
+## Caputre WiFi packests using MAC OS <a name="capture_using_macos"/>

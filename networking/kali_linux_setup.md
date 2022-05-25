@@ -1,7 +1,8 @@
 ## Content
-[Driver install on Kali Linux](driver_install)
+* [Add persistence to a live Kali Linux USB drive on Mac](#add_persistence_live_kali)
+* [Driver install on Kali Linux](#driver_install)
 
-## Add persistence to a live Kali Linux USB drive on Mac <a name=""/>
+## Add persistence to a live Kali Linux USB drive on Mac <a name="add_persistence_live_kali"/>
 
 Assuming you have a functioning Live USB, then boot into that. (On a Mac, that means holding down Option on startup.) On Kali’s boot screen, then choose the default top choice to load.
 

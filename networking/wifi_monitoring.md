@@ -2,6 +2,7 @@
 * [The packet flow of a wireless client associating to an access point](#packet_flow)
 * [The Probe request, Authentication, Association and Handshake packets](#connect_packets)
 * [Wireshark filters](#wireshark_filters)
+* [Beacon packet](#beacon_packet_info)
 * [How to decrypt IEE 802.11 traffic](#decript_traffic)
 * [Caputre WiFi packests using Kali linux](#capture_using_kali_linux)
 * [Caputre WiFi packests using MAC OS](#capture_using_macos)
@@ -16,9 +17,28 @@
 <img src="./img/wifi_monitoring/wireless_auth_packets.png" height="250px"/>
 
 ## Wireshark filters <a name="wireshark_filters"/>
-* To fliter the packets form the client: wlan.addr == <mac addr>
+* To fliter the packets form the client: wlan.addr == _mac addr_
 * Filer for protocols: bootp icmp
 
+## Beacon packet info <a name="beacon_packet_info"/>
+
+```
+# Packet type is beacon:
+> IEEE 802.11 Beacon frame, Flags: ........C
+
+# Data rate is 6 Mb/s, the channel number is 6
+> Radiotap Header v0, Length 56
+Data Rate: 6.0 Mb/s
+Channel frequency: 2437 [BG 6]
+
+# SSID
+> IEEE 802.11 Wireless Management
+   > Tagged parameters (270 bytes)
+      > Tag: SSID parameter set: DIRECT-DIRECT-DIRECT-DIRECT-DIRE
+         > SSID: DIRECT-DIRECT-DIRECT-DIRECT-DIRE
+```
+
+  
 ## How to decrypt IEE 802.11 traffic <a name="decript_traffic"/>
   
 Wireshark -> Preferences -> Protocols -> IEE 802.11\

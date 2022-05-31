@@ -118,7 +118,7 @@ wlan0mon  IEEE 802.11  Mode:Monitor  Frequency:2.457 GHz  Tx-Power=20 dBm
 
 To capture packets without wireshark
 ```
-$ airodump-ng --channel 11 --bssid 90:99:90:99:90:99 wlan0mon
+$ airodump-ng --channel 11 --bssid 76:6f:f7:88:90:65 --output-format pcap -w my_pcap wlan0mon
 ```
 
 To stop the monitor mode:

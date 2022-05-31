@@ -95,6 +95,9 @@ $ sudo airmon-ng check
 ```
   
 ```
+# display the availabe wireless interfaces
+$ iwconfig
+
 # sudo airmon-ng start <interface name> <channel id>
 $ sudo airmon-ng start wlan0 10
 PHY     Interface       Driver          Chipset

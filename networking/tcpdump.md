@@ -18,19 +18,29 @@
 * Capture **all IP6 traffic** using the protocol option: `tcpdump ip6`
 * Use a **range of ports**: `tcpdump portrange 21-23`
 * If you’re looking for **packets of a particular size** you can use these options: `tcpdump less 32`; `tcpdump greater 64`; `tcpdump <= 128`
+* To print the TCP **packets with flags RST and ACK both set**. (i.e. select only the RST and ACK flags in the flags field, and if the result is "RST and ACK both set", match) `tcpdump 'tcp[tcpflags] & (tcp-rst|tcp-ack) == (tcp-rst|tcp-ack)'`
+* To print **all IPv4 HTTP packets to and from port 80**, i.e. print only packets that contain data, **not, for example, SYN and FIN packets and ACK-only packets**. (IPv6 is left as an exercise for the reader.): `tcpdump 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'`
+* To print **IP packets longer than 576 bytes** sent through gateway *snup*: `tcpdump 'gateway snup and ip[2:2] > 576'`
+* To print **IP broadcast or multicast packets that were not sent via Ethernet broadcast or multicast**: `tcpdump 'ether[0] & 1 = 0 and ip[16] >= 224'`
+* To print all **ICMP packets that are not echo requests/replies (i.e., not ping packets)**: `tcpdump 'icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply'`
 
 ### Advanced
 
-#### More options
-Here are some additional ways to tweak how you call tcpdump.
-
+#### Options
+Here are ways to tweak how you call tcpdump.
+* -n: Don't convert addresses (i.e., host addresses, port numbers, etc.) to names.
+* -A: Print each packet (minus its link level header) in ASCII. Handy for capturing web pages.
+* -x, -xx: as -X and -XX but only in hex
 * -X : Show the packet’s contents in both hex and ASCII.
 * -XX : Same as -X, but also shows the ethernet header.
 * -D : Show the list of available interfaces
 * -l : Line-readable output (for viewing as you save, or sending to other commands)
 * -q : Be less verbose (more quiet) with your output.
-* -t : Give human-readable timestamp output.
-* -tttt : Give maximally human-readable timestamp output.
+* -t : Give human-readable timestamp output (don't print a timestamp on each dump line.).
+* -tt: Print the timestamp, as seconds since January 1, 1970, 00:00:00, UTC, and fractions of a second since that time, on each dump line.
+* -ttt: Print a delta (microsecond or nanosecond resolution depending on the --time-stamp-precision option) between current and previous line on each dump line. The default is microsecond resolution.
+* -tttt: Give maximally human-readable timestamp output (Print a timestamp, as hours, minutes, seconds, and fractions of a second since midnight, preceded by the date, on each dump line.)
+* -ttttt: Print a delta (microsecond or nanosecond resolution depending on the --time-stamp-precision option) between current and first line on each dump line. The default is microsecond resolution.
 * -i eth0 : Listen on the eth0 interface.
 * -vv : Verbose output (more v’s gives more output).
 * -c : Only get x number of packets and then stop.
@@ -39,6 +49,13 @@ Here are some additional ways to tweak how you call tcpdump.
 * -e : Get the ethernet header as well.
 * -q : Show less protocol information.
 * -E : Decrypt IPSEC traffic by providing an encryption key.
+* -C file_size: split the output file (by adding a suffix of k/K, m/M or g/G to the value, the unit can be changed to 1,024 (KiB), 1,048,576 (MiB), or 1,073,741,824 (GiB) respectively.)
+* -W filecount: Used in conjunction with the -C option, this will limit the number of files created to the specified number, and begin overwriting files from the beginning, thus creating a 'rotating' buffer.
+* -F file: Use file as input for the filter expression. An additional expression given on the command line is ignored.
+* -G rotate_seconds: rotates the dump file specified with the -w option every rotate_seconds seconds.
+* -z postrotate-command: For example, specifying -z gzip or -z bzip2 will compress each savefile using gzip or bzip2. For example, specifying -z gzip or -z bzip2 will compress each savefile using gzip or bzip2.
+* -r file: Read packets from file
+* -w file: This output will be buffered.  Use the -U flag to cause packets to be written as soon as they are received.
 
 #### More samples
 * Use this combination to see verbose output, with no resolution of hostnames or port numbers, using absolute sequence numbers, and showing human-readable timestamps: `tcpdump -ttnnvvS`

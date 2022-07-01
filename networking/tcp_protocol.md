@@ -75,7 +75,7 @@ The other useful goal of keepalive is to prevent inactivity from disconnecting t
 
 ```
 
-### Configuring the kernel for TCP keepalive parameters <a name="conf_kernel_keepalive"/>
+### Configuring the kernel for TCP keepalive parameters (accessing kernel variables) <a name="conf_kernel_keepalive"/>
 There are two ways to configure keepalive parameters inside the kernel via userspace commands:
 * *procfs* interface
   * This interface requires both *sysctl* and *procfs* to be built into the kernel, and procfs mounted somewhere in the filesystem (usually on /proc)
@@ -110,4 +110,5 @@ There are two ways to configure keepalive parameters inside the kernel via users
   net.ipv4.tcp_keepalive_probes = 20
   ```
 * *sysctl* interface
+  * There is another way to access kernel variables: sysctl(2 ) syscall. It can be useful when you don't have procfs available because the communication with the kernel is performed directly via syscall and not through the procfs subtree.
  

@@ -1,6 +1,18 @@
 ## Content
+
+### All distributions
+* [How to reconfigure your system every time it boots up](#reconfigure_system_at_boot_up)
+
+### Kali
 * [Add persistence to a live Kali Linux USB drive on Mac](#add_persistence_live_kali)
 * [Driver install on Kali Linux](#driver_install)
+
+### Ubuntu
+
+## How to reconfigure your system every time it boots up <a name="reconfigure_system_at_boot_up"/>
+There are several ways to reconfigure your system every time it boots up. 
+* First, remember that every Linux distribution has its own set of init scripts called by init (8). The most common configurations include the **/etc/rc.d/** directory, or the alternative, **/etc/init.d/.** 
+* The second is the **rc.local** script, usually included in all distributions (e.g in /etc/rc.local on Ubuntu), which is known as the place where user configuration setups are done. This script is executed at the end of each multiuser runlevel.
 
 ## Add persistence to a live Kali Linux USB drive on Mac <a name="add_persistence_live_kali"/>
 

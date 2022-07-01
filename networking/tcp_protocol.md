@@ -89,7 +89,7 @@ There are two ways to configure keepalive parameters inside the kernel via users
   ```
   * The first two parameters are expressed in seconds, and the last is the pure number. This means that the keepalive routines wait for two hours (7200 secs) before sending the first keepalive probe, and then resend it every 75 seconds. If no ACK response is received for nine consecutive times, the connection is marked as broken.
   * To modify a value: `# echo 600 > /proc/sys/net/ipv4/tcp_keepalive_time`
-  * You can access the interface through the sysctl(8) tool, specifying what you want to read or write (Note that sysctl names are very close to procfs paths).
+  * You can access the interface through the sysctl(8) **tool**, specifying what you want to read or write (Note that sysctl names are very close to procfs paths).
   ```
   # sysctl \
   > net.ipv4.tcp_keepalive_time \
@@ -110,5 +110,5 @@ There are two ways to configure keepalive parameters inside the kernel via users
   net.ipv4.tcp_keepalive_probes = 20
   ```
 * *sysctl* interface
-  * There is another way to access kernel variables: sysctl(2 ) syscall. It can be useful when you don't have procfs available because the communication with the kernel is performed directly via syscall and not through the procfs subtree.
+  * There is another way to access kernel variables: sysctl(2 ) **syscall**. It can be useful when you don't have *procfs* available because the communication with the kernel is performed directly via syscall and not through the procfs subtree.
  

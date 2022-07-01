@@ -29,7 +29,7 @@ For example, the initial relative sequence number shown in packet #1 is 0 (natur
 <img src="./img/tcp_protocol/relative_sequence_numbers.png"/>
 
 To better understand how sequence and acknowledgement numbers are used throughout the duration of a TCP session, we can utilize Wireshark's built-in flow graphing ability. Navigate to **Statistics > Flow Graph...**, select **TCP flow** and click **OK**. Wireshark automatically builds a graphical summary of the TCP flow.\
-Check [show_statistics](./wireshark.md)
+Check [Wireshark -> Show Statistics](./wireshark.md#show_statistics)
 
 ## TCP keepalive <a name="keepalive"/>
 Determine whether the connection is still up and running or if it has broken.

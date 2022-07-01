@@ -79,15 +79,35 @@ The other useful goal of keepalive is to prevent inactivity from disconnecting t
 There are two ways to configure keepalive parameters inside the kernel via userspace commands:
 * *procfs* interface
   * This interface requires both *sysctl* and *procfs* to be built into the kernel, and procfs mounted somewhere in the filesystem (usually on /proc)
-```
+  ```
   # cat /proc/sys/net/ipv4/tcp_keepalive_time
   7200
   # cat /proc/sys/net/ipv4/tcp_keepalive_intvl
   75
   # cat /proc/sys/net/ipv4/tcp_keepalive_probes
   9
-```
+  ```
   * The first two parameters are expressed in seconds, and the last is the pure number. This means that the keepalive routines wait for two hours (7200 secs) before sending the first keepalive probe, and then resend it every 75 seconds. If no ACK response is received for nine consecutive times, the connection is marked as broken.
   * To modify a value: `# echo 600 > /proc/sys/net/ipv4/tcp_keepalive_time`
+  * You can access the interface through the sysctl(8) tool, specifying what you want to read or write (Note that sysctl names are very close to procfs paths).
+  ```
+  # sysctl \
+  > net.ipv4.tcp_keepalive_time \
+  > net.ipv4.tcp_keepalive_intvl \
+  > net.ipv4.tcp_keepalive_probes
+  net.ipv4.tcp_keepalive_time = 7200
+  net.ipv4.tcp_keepalive_intvl = 75
+  net.ipv4.tcp_keepalive_probes = 9
+  ```
+  * Write is performed using the -w switch of sysctl (8):
+  ```
+  # sysctl -w \
+  > net.ipv4.tcp_keepalive_time=600 \
+  > net.ipv4.tcp_keepalive_intvl=60 \
+  > net.ipv4.tcp_keepalive_probes=20
+  net.ipv4.tcp_keepalive_time = 600
+  net.ipv4.tcp_keepalive_intvl = 60
+  net.ipv4.tcp_keepalive_probes = 20
+  ```
 * *sysctl* interface
  

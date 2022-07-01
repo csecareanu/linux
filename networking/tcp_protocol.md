@@ -1,5 +1,6 @@
 ## Content
 * [The three-way handshake](#three-way_handshake)
+* [Sequence and Acknowledgment Numbers](#sequence-and-acknowledgment-numbers)
 * [TCP keepalive](#keepalive)
   *  [Checking for dead peers](#checking_for_dead_peers)
   *  [Preventing disconnection due to network inactivity](#prev_disconn_due_to_innactivity)
@@ -19,6 +20,16 @@ The initial three-way handshake, with one SYN segment from A to B, the SYN/ACK b
       |--->--->--->-------------- ACK -------------->--->--->---|
       |                                                         |
 ```
+
+## Sequence and Acknowledgment Numbers <a name="sequence-and-acknowledgment-numbers"/>
+When a host initiates a TCP session, its initial sequence number is effectively random.\
+ However, protocol analyzers like Wireshark will typically display _relative_ sequence and acknowledgement numbers in place of the actual values. These numbers are relative to the initial sequence number of that stream.\
+
+For example, the initial relative sequence number shown in packet #1 is 0 (naturally), while the ASCII decode in the third pane shows that the actual sequence number is 0xf61c6cbe, or 4129057982 decimal.\
+<img src="./img/tcp_protocol/relative_sequence_numbers.png"/>
+
+To better understand how sequence and acknowledgement numbers are used throughout the duration of a TCP session, we can utilize Wireshark's built-in flow graphing ability. Navigate to **Statistics > Flow Graph...**, select **TCP flow** and click **OK**. Wireshark automatically builds a graphical summary of the TCP flow.\
+Check [show_statistics](./wireshark.md)
 
 ## TCP keepalive <a name="keepalive"/>
 Determine whether the connection is still up and running or if it has broken.

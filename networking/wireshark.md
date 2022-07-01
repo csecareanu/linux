@@ -3,15 +3,16 @@
   * [How to add a new column](#add_new_column)
   * [TCP Window Size](#add_column_tcp_window_size)
   * [TCP Delta time](#add_column_tcp_delta_time)
+ * [Show Statistics](#show_statistics)
 
 **Any time you see something between sqare brackets `[...]` in Wireshark, it is an intepretation, it is not an actual field.**
  * [Timestamps] - _wireshark interpretation_
  * [SEQ/ACK analysis] - _wireshark interpretation_ 
  * Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps - _wireshark data_
 
-## Add new columns <a name='add_new_columns'>
+## Add new columns <a name='add_new_columns'/>
  
-### How to add a new column <a name='add_new_column'>
+### How to add a new column <a name='add_new_column'/>
 
 I. You can add a new colum by opening the Wireshark settings
   * Go to: Edit -> Preferences -> Columns
@@ -21,12 +22,12 @@ II. Or you can add a new colum by browsing a packet to the required field
   * Right click -> Apply as column
   * To change the column name -> right clic on column header -> Edit Column
  
-### TCP Window Size <a name="add_column_tcp_window_size">
+### TCP Window Size <a name="add_column_tcp_window_size"/>
   * Title: Window size value
   * Typee: Custom 
   * Fields: tcp.window_size_value  (or you can use the field tcp.window_size if you want to work with the calculated scaling window value)
 
- ### TCP Delta time <a name="add_column_tcp_delta_time">
+ ### TCP Delta time <a name="add_column_tcp_delta_time"/>
  
  TCP Delta Time measures how much time elapsed between the prior and current packet in the conversation, for each connection, separately.
  
@@ -40,3 +41,7 @@ This filed coresponds to wireshark interpretation:
    [Time since first frame in this TCP stream: 0.191943000 seconds]\
    [Time since previous frame in this TCP stream: 0.000023000 seconds] -> Time dela from previous frame in this TCP stream (tcp.time_delta)
 ```
+
+## Show Statistics <a name="show_statistics"/>
+*  To better understand how sequence and acknowledgement numbers are used throughout the duration of a TCP session, we can utilize Wireshark's built-in flow graphing ability. Navigate to **Statistics > Flow Graph...**, select **TCP flow** and click **OK**. Wireshark automatically builds a graphical summary of the TCP flow.
+

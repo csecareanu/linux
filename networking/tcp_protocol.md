@@ -114,7 +114,7 @@ There are two ways to configure keepalive parameters inside the kernel via users
   * There is another way to access kernel variables: sysctl(2 ) **syscall**. It can be useful when you don't have *procfs* available because the communication with the kernel is performed directly via syscall and not through the procfs subtree.
  
 ### Making changes persistent to reboot <a name="make_changes_persistent_to_reboot"/>
-Detailed info about configuring settings at reboot: [linux_configuration,startup_scripts(kali,ubuntu...).md]./linux_configuration,startup_scripts(kali,ubuntu...).md
+Detailed info about configuring settings at reboot: [linux_configuration,startup_scripts(kali,ubuntu...).md](./linux_configuration,startup_scripts(kali,ubuntu...).md)
 
 Every Linux distribution has its own set of init scripts called by init (8). The most common configurations include the **/etc/rc.d/** directory, or the alternative, **/etc/init.d/**. In any case, you can set the parameters in any of the startup scripts, because keepalive rereads the values every time its procedures need them. So if you change the value of _tcp_keepalive_intvl_ when the connection is still up, the kernel will use the new value going forward.
 

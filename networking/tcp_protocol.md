@@ -114,9 +114,11 @@ There are two ways to configure keepalive parameters inside the kernel via users
   * There is another way to access kernel variables: sysctl(2 ) **syscall**. It can be useful when you don't have *procfs* available because the communication with the kernel is performed directly via syscall and not through the procfs subtree.
  
 ### Making changes persistent to reboot <a name="make_changes_persistent_to_reboot"/>
+Detailed info about configuring settings at reboot: [linux_configuration,startup_scripts(kali,ubuntu...).md]./linux_configuration,startup_scripts(kali,ubuntu...).md
+
 Every Linux distribution has its own set of init scripts called by init (8). The most common configurations include the **/etc/rc.d/** directory, or the alternative, **/etc/init.d/**. In any case, you can set the parameters in any of the startup scripts, because keepalive rereads the values every time its procedures need them. So if you change the value of _tcp_keepalive_intvl_ when the connection is still up, the kernel will use the new value going forward.
 
 There are three spots where the initialization commands should logically be placed: 
 * the first is where your network is configured
 * the second is the **rc.local** script, usually included in all distributions (/etc/rc.local on ubuntu), which is known as the place where user configuration setups are done. 
-* the third place may already exist in your system. Referring back to the sysctl (8) tool, you can see that the -p switch loads settings from the /etc/sysctl.conf configuration file. In many cases your init script already performs the sysctl -p (you can "grep" it in the configuration directory for confirmation), and so you just have to add the lines in _/etc/sysctl.conf_ to make them load at every boot. For more information about the syntax of sysctl.conf(5), refer to the manpage.
+* the third place may already exist in your system. Referring back to the sysctl (8) tool, you can see that the -p switch loads settings from the /etc/sysctl.conf configuration file. In many cases your init script already performs the sysctl -p (you can "grep" it in the configuration directory for confirmation), and so you just have to add the lines in _/etc/sysctl.conf_ to make them load at every boot. For more information about the syntax of _sysctl.conf(5)_, refer to the manpage.
